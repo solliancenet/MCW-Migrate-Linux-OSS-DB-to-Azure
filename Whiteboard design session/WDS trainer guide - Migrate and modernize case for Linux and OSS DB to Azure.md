@@ -206,6 +206,8 @@ The initial workload to prove the feasibility of the migration process consists 
         - Each with 4 CPU cores and 32 GB memory
     - Database size: 500 MB
 
+The development standards that Terra Firm has established include DevOps automation to deploy the web application code to the front end servers. They also utilize Git for version control for all their development teams.
+
 This initial workload utilizes components that represent those used by most of their workloads throughout the on-premises datacenter. in their on-premises datacenter. They need to start with creating a migration plan around this workload to prove the larger overall strategy that will be implemented. According to Nedry, “It’s really important we have a solid migration plan, as we will be sunsetting our on-premises datacenter in the next 2 to 3 years.”
 
 ### Customer needs
@@ -228,7 +230,8 @@ This initial workload utilizes components that represent those used by most of t
 
 ### Infographic for common scenarios
 
-\[insert your custom workshop content here . . . \]
+**Hub-spoke network topology in Azure**
+![The image shows how on-premises network on the left connects through Azure ExpressRoute to the Hub VNet with Azure Bastion and Azure Firewall. On the right is multiple Spoke VNet that connect to the Hub VNet through VNet Peering and hosts multiple VM workloads.](images/diagram-azure-vnet-hub-spoke.png "Hub-spoke network topology in Azure")
 
 ## Step 2: Design a proof of concept solution
 
@@ -321,10 +324,14 @@ Directions: Reconvene with the larger group to hear the facilitator/SME share th
 |    |            |
 |----------|:-------------:|
 | **Description** | **Links** |
-|   |   |
-|   |   |
-|   |   |
-|   |   |
+| Microsoft Azure Reference Architectures| <https://docs.microsoft.com/azure/guidance/guidance-architecture> |
+| What is Azure Database for MySQL? | <https://learn.microsoft.com/azure/mysql/single-server/overview> |
+| Azure Database Migration Service | <https://azure.microsoft.com/products/database-migration/#overview> |
+| Tutorial: Migrate MySQL to Azure Database for MySQL offline using DMS | <https://learn.microsoft.com/azure/dms/tutorial-mysql-azure-mysql-offline-portal> |
+| Hub-spoke network topology in Azure | <https://learn.microsoft.com/azure/architecture/reference-architectures/hybrid-networking/hub-spoke> |
+| Private Network Access for Azure Database for MySQL - Flexible Server | <https://learn.microsoft.com/azure/mysql/flexible-server/concepts-networking-vnet> |
+| Extend an on-premises network using ExpressRoute | <https://docs.microsoft.com/azure/architecture/reference-architectures/hybrid-networking/expressroute> |
+
 
 # Migrate and modernize case for Linux and OSS DB to Azure whiteboard design session trainer guide
 
@@ -403,29 +410,81 @@ These are some reasons for the chosen options in the preferred solution:
 
 1. How will you migrate the on-premises PHP workloads to Azure?
 
-    ?
+    Since it is recommended to upgrade the version of Windows Server from 2012 to 2022, it will be necessary to create new servers. In this case, Azure Migrate can not be used to move the on-premises VMs into Azure as-is. New Azure VMs need to be created with the application workloads deployed to these new Azure VMs.
+
+    Application deployment automation is already being done using DevOps practices within Terra Firm Laboratories, so there should be minimal effort necessary to extend those pipelines to deploy to the new Azure VMs in parallel. This parallel deployment will enable the on-premises and Azure VMs to be deployed to simultaneously with the latest source code deployed to both sets of hosting infrastructure. This will simplify the cutover process of redirecting web application traffic to the new Azure VMs. It will also enable a simplified process to rollback in the event of a migration failure.
 
 2. How will you migrate the on-premise MySQL database workloads to Azure?
 
-    ?
+    The MySQL databases will be migrated to Azure Database for MySQL. The Azure Database for MySQL service will utilize VNet integration to securely connect to the Spoke VNET in the Hub and Spoke network topology.
+
+    The MySQL databases will be migrated using the Azure Database Migration Service to perform a one-time full database migration from the on-premises MySQL databases to Azure Database for MySQL. During the migration process the on-premises MySQL databases will remain until the cutover to Azure Database for MySQL is verified.
 
 *Pricing*
 
 1. What is the estimated cost for the workloads after being migrated to Azure IaaS?
 
-    text
+    Be sure to cover all aspects of the design, including the primary site, disaster recovery (DR) solution, backup solution, and monitoring costs
+
+    What's the best option for hosting the MySQL database workloads?
+
+    Have you included all appropriate cost-saving measures?
 
     **Solution**
 
-    text
+    Pricing Azure solutions is a complex task. The example solution below includes many assumptions, for example on virtual machine size. These need to be validated with Terra Firm.
+
+    Since Terra Firm and their current on-premises datacenter is in Palo Alto, CA, the nearest Azure Region to use will be West US. Their secondary Azure region for DR will be East US, as that's the Azure region pair for West US.
+
+    The following pricing estimates are for their primary region. There will need to be additional discussions with Terra Firm Laboratories to determine the extent of Disaster Recovery (DR) they require for this initial set of workloads being migrated to Azure.
+
+    _Web application_
+
+    | **Component** | **Region** | **Details / Assumptions** | **Est. Monthly Cost (USD)** |
+    |----------|:-------------:|:-------------:|:-------------:|
+    | Linux Virtual Machines | West US | 2x D4 v5 VMs (4 vCores, 16 GiB RAM) & Red Hat Enterprise Linux | $62.1376 each |
+
+    > **Note:** The D4 v5 VM pricing estimate is for Azure Hybrid Benefit (AHB) pricing with 3 year reserved instance. For Pay as you go with AHB the estimated cost would be $163.52 per month for each VM. Reserved instances offers a much lower cost.
+
+    _MySQL databases_
+
+    | **Component** | **Region** | **Details / Assumptions** | **Est. Monthly Cost (USD)** |
+    |----------|:-------------:|:-------------:|:-------------:|
+    | MySQL database | West US | Flexible Server D8 v4 (8 vCores, 32 GiB RAM) | $261.75 |
+
+    > **Note:** The Flexible Server D8 v4 pricing estimate is for a 3 year reserved instance. For Pay as you go the estimated cost would be 569.40 per month. Reserved instances offers a much lower cost. Also, this cost estimate does not include storage or additional IOPS since the total cost of these will vary depending on the database usage.
 
 2. What is the estimated cost for the web application workloads if migrated to Azure PaaS?
 
-    text
+    Be sure to cover all aspects of the design, including the primary site, disaster recovery (DR) solution, backup solution, and monitoring costs
+
+    How does the cost of PaaS compare to IaaS?
 
     **Solution**
 
-    text
+    Pricing Azure solutions is complex task. The example solution below includes many assumptions, for example on Azure App Service pricing tier. These need to be validated with Terra Firm.
+
+    Since Terra Firm and their current on-premises datacenter is in Palo Alto, CA, the nearest Azure Region to use will be West US. Their secondary Azure region for DR will be East US, as that's the Azure region pair for West US.
+
+    The following pricing estimates are for their primary region. There will need to be additional discussions with Terra Firm Laboratories to determine the extent of Disaster Recovery (DR) they require for this initial set of workloads being migrated to Azure.
+
+    _Web application_
+
+    For hosting the PHP web application in Azure using a PaaS service, then Azure App Service is the most appropriate service. App Service offers a fully managed service with built-in infrastructure maintenance, security patching, and scaling. This reduces the cost of maintenance allowing IT Admins more time to work on other tasks instead of maintaining VMs.
+
+    App Service also support VNet integration enabling integration with the Hub and Spoke networking topology to meet the security requirements of Terra Firm.
+
+    | **Component** | **Region** | **Details / Assumptions** | **Est. Monthly Cost (USD)** |
+    |----------|:-------------:|:-------------:|:-------------:|
+    | Azure App Service Plan | West US | P2v3 (4 vCores, 16 GB RAM) | $295 |
+
+    > **Note:** The P2v3 pricing estimate is for 3 year reserved instance. For Pay as you go the estimated cost would be $489 per month. Reserved instance offers much lower cost.
+
+    A comparison of the estimated cost of a single VM to Azure App Service as estimated in the preferred solution shows that PaaS hosting using Azure App Service costs more. However, it's important to remember that with Azure App Service being a fully managed service, the overall maintenance costs for IT Admins will be lower. Further consultation will need to be performed with Terra Firm to determine how much administration time will be saved by hosting on Azure App Service instead of VMs.
+
+    _MySQL databases_
+
+    The preferred solution includes hosting the MySQL databases using Azure Database for MySQL. This is already a PaaS service, so the previous cost estimate remains the same.
 
 ## Checklist of preferred objection handling
 
@@ -437,8 +496,9 @@ These are some reasons for the chosen options in the preferred solution:
 
 2. What options does Azure provide for utilizing existing Red Hat Subscription to save on Red Hat enterprise Linux (RHEL) VM cost in the cloud?
 
-   Red Hat AHB 
-   https://learn.microsoft.com/en-us/azure/virtual-machines/linux/azure-hybrid-benefit-linux
+    Azure Hybrid Benefit (AHB) for pay-as-you-go virtual machines or virtual machine scale sets (Flexible orchestration mode only) is an optional licensing benefit. It significantly reduces the cost of running Red Hat Enterprise Linux (RHEL) and SUSE Linux Enterprise Server (SLES) virtual machines in the cloud.
+
+    After Azure Hybrid Benefit is applied to a RHEL or SLES virtual machine, you are no longer charged a software fee. Your virtual machine is charged a BYOS (bring your own subscription) fee instead.
 
 3. Securing and monitoring our on-premises workloads is extremely important. What options does Azure offer to extend this into the cloud?
 
@@ -456,5 +516,6 @@ These are some reasons for the chosen options in the preferred solution:
 
 ## Customer quote (to be read back to the attendees at the end)
 
-\[insert your custom workshop content here . . . \]
+"We recognized the need and benefits of migrating our aging infrastructure to Azure. I know this migration is going to help us increase reliability while lowering operation and maintenance costs. I'm really looking forward modernizing with cloud infrastructure that will allow us to do more with less."
 
+-Dennis Nedry, CTO, Terra Firm Laboratories

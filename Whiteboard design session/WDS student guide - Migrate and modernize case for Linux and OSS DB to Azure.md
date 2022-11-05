@@ -83,6 +83,8 @@ The initial workload to prove the feasibility of the migration process consists 
         - Each with 4 CPU cores and 32 GB memory
     - Database size: 500 MB
 
+The development standards that Terra Firm has established include DevOps automation to deploy the web application code to the front end servers. They also utilize Git for version control for all their development teams.
+
 This initial workload utilizes components that represent those used by most of their workloads throughout the on-premises datacenter. in their on-premises datacenter. They need to start with creating a migration plan around this workload to prove the larger overall strategy that will be implemented. According to Nedry, “It’s really important we have a solid migration plan, as we will be sunsetting our on-premises datacenter in the next 2 to 3 years.”
 
 ### Customer needs
@@ -105,7 +107,8 @@ This initial workload utilizes components that represent those used by most of t
 
 ### Infographic for common scenarios
 
-\[insert your custom workshop content here . . . \]
+**Hub-spoke network topology in Azure**
+![The image shows how on-premises network on the left connects through Azure ExpressRoute to the Hub VNet with Azure Bastion and Azure Firewall. On the right is multiple Spoke VNet that connect to the Hub VNet through VNet Peering and hosts multiple VM workloads.](images/diagram-azure-vnet-hub-spoke.png "Hub-spoke network topology in Azure")
 
 ## Step 2: Design a proof of concept solution
 
@@ -198,7 +201,10 @@ Directions: Reconvene with the larger group to hear the facilitator/SME share th
 |    |            |
 |----------|:-------------:|
 | **Description** | **Links** |
-|   |   |
-|   |   |
-|   |   |
-|   |   |
+| Microsoft Azure Reference Architectures| <https://docs.microsoft.com/azure/guidance/guidance-architecture> |
+| What is Azure Database for MySQL? | <https://learn.microsoft.com/azure/mysql/single-server/overview> |
+| Azure Database Migration Service | <https://azure.microsoft.com/products/database-migration/#overview> |
+| Tutorial: Migrate MySQL to Azure Database for MySQL offline using DMS | <https://learn.microsoft.com/azure/dms/tutorial-mysql-azure-mysql-offline-portal> |
+| Hub-spoke network topology in Azure | <https://learn.microsoft.com/azure/architecture/reference-architectures/hybrid-networking/hub-spoke> |
+| Private Network Access for Azure Database for MySQL - Flexible Server | <https://learn.microsoft.com/azure/mysql/flexible-server/concepts-networking-vnet> |
+| Extend an on-premises network using ExpressRoute | <https://docs.microsoft.com/azure/architecture/reference-architectures/hybrid-networking/expressroute> |
