@@ -168,7 +168,9 @@ When participants are doing activities, you can **look ahead to refresh your mem
 
 ## Abstract and learning objectives
 
-\[insert what is trying to be solved for by using this workshop. . . \]
+In this whiteboard design session, you will learn to design a strategy for migrating existing on-premises Red Hat Enterprise Linux (RHEL) and MySQL database workloads to Azure. Throughout the whiteboard design session, you will look at the virtual machine (VM) pricing and migrating MySQL database workloads to Azure.
+
+At the end of the workshop, you will be better able to design a migration strategy for Red Hat Enterprise Linux (RHEL) workloads to Azure VMs and MySQL database workloads to Azure Database for MySQL.
 
 ## Step 1: Review the customer case study
 
@@ -410,7 +412,7 @@ These are some reasons for the chosen options in the preferred solution:
 
 1. How will you migrate the on-premises PHP workloads to Azure?
 
-    Since it is recommended to upgrade the version of Windows Server from 2012 to 2022, it will be necessary to create new servers. In this case, Azure Migrate can not be used to move the on-premises VMs into Azure as-is. New Azure VMs need to be created with the application workloads deployed to these new Azure VMs.
+    Since it is recommended to upgrade the latest version of Red Hat Enterprise Linux, it will be necessary to create new servers. In this case, Azure Migrate can not be used to move the on-premises VMs into Azure as-is. New Azure VMs need to be created with the application workloads deployed to these new Azure VMs.
 
     Application deployment automation is already being done using DevOps practices within Terra Firm Laboratories, so there should be minimal effort necessary to extend those pipelines to deploy to the new Azure VMs in parallel. This parallel deployment will enable the on-premises and Azure VMs to be deployed to simultaneously with the latest source code deployed to both sets of hosting infrastructure. This will simplify the cutover process of redirecting web application traffic to the new Azure VMs. It will also enable a simplified process to rollback in the event of a migration failure.
 
@@ -490,7 +492,7 @@ These are some reasons for the chosen options in the preferred solution:
 
 1. What are the options to roll back to the on-premises VMs if the migration fails?
 
-    The migration process will be designed to create new application deployments to the new Red hat Enterprise Linux VMs in Azure in parallel to the existing on-premises VMs. This will allow traffic to be cut over to the new VMs when ready.
+    The migration process will be designed to create new application deployments to the new Red Hat Enterprise Linux VMs in Azure in parallel to the existing on-premises VMs. This will allow traffic to be cut over to the new VMs when ready.
 
     In the event of an unexpected issue during migration, the existing on-premises VMs, application deployments, and databases will remain in place as a fallback. If there is an issue detected during the cutover process, the on-premises servers will be able to immediately pick up where they left off.
 
@@ -510,7 +512,7 @@ These are some reasons for the chosen options in the preferred solution:
 
     Further evaluation of the applications will be necessary to determine the requirements for hosting these applications using Azure App Service. App Service Web Apps provide a PaaS hosting option for applications that further reduce the management burden over IaaS VMs. It supports applications built with PHP among other development languages, as well as running on a Linux host for the Web App.
 
-    Azure Kubernetes Service (AKS) is another potential option for hosting applications. For Tailspin Toys, this may not be the best option as it would likely require redesign of the applications to host in AKS. If Azure App Service doesn't meet their requirements, then AKS may offer an alternative that fits better.
+    Azure Kubernetes Service (AKS) is another potential option for hosting applications. For Terra Firm, this may not be the best option as it would likely require redesign of the applications to host in AKS. If Azure App Service doesn't meet their requirements, then AKS may offer an alternative that fits better.
 
     If they are willing to redesign their applications, then serverless hosting with Azure Functions could be a consideration. The applications would not be able to be hosted in Azure Functions as they are currently written. This would be applicable to any backend REST APIs they have and not as much to the front end web applications. The primary benefits of Azure Functions is that is can reduce the amount of source code the development team must write and maintain. Also, given the security requirements of Terra Firm, they would need to use dedicated hosting so it would cost similar to using App Service for hosting the original application.
 

@@ -1,53 +1,51 @@
 # Migrate and modernize case for Linux and OSS DB to Azure*
-*Please provide an introduction to the workshop. For example:*
 
-Trey Research Inc. looks at the old way of doing things in retail and introduces innovative experiences that delight customers and drive sales. Their latest initiative focuses on intelligent vending machines that support commerce, engagement analytics, and intelligent promotions. 
+Terra Firm Laboratories is a global bioengineering company that’s the leading researcher and innovator in genetic and biological science technology. The company was founded in 1975 with its corporate headquarters in Palo Alto, CA. Their mission-critical workloads are currently hosted in an on-premises datacenter and are beginning a journey to modernize and migrate into the cloud using Microsoft Azure.
 
-Month, year (date last reviewed)
+The CTO, Dennis Nedry, has kicked off an initiative for the organization to begin adopting the Microsoft Azure cloud, and modernize its infrastructure. He has already had his team begin assessing their current environment and what it will take to migrate to the cloud. They are looking to optimize their technology investments by reducing technical debt and streamlining operations using Azure Infrastructure as a Service (IaaS) and Platform as a Service (PaaS) cloud services.
+
+November 2022
 
 ## Target audience
-*Please list the target audience for this workshop. For example:*
--	Application developer
--	Infrastructure architect
--	Database administrator
--	AI developer
--	Data scientist
+
+- Technical Architects
+- Infrastructure Architects
+- Data Architects
 
 ## Abstracts
-*Please provide descriptions of the overall workshop, the whiteboard design session and hands on lab. For example:*
 
 ### Workshop
-In this workshop, you will look at the process of migrating an on-premises data warehouse to Azure SQL Data Warehouse. Throughout the whiteboard design session and hands-on lab, you will look at the planning process for data warehouse migration, identifying schema and data incompatibilities, efficiently migrating data from on-premises databases to the cloud, data distribution in Azure SQL Data Warehouse, migrating ETL jobs to Azure Data Factory, and supporting ad-hoc workloads in an Azure SQL Data Warehouse through Azure Analysis Services.
 
-At the end of this workshop, you will be better able to [deliver, demonstrate, solve, present, migrate, build, design, architect, construct, modify] ….
+In this workshop, you will gain experience designing and implementing a strategy for migrating Red Hat Enterprise Linux (RHEL) and MySQL database workloads to Azure.
 
-### Whiteboard design session *(this will go in the readme and in the WDS document)*
-In this whiteboard design session, you will work in a group to look at the process of migrating an on-premises data warehouse to Azure SQL Data Warehouse. The design session will cover planning for a data warehouse migration, data and schema preparation, data loading, optimizing the data distribution, and building a solution to support ad-hoc queries.
+At the end of the workshop, you will be better able to design and implement an Azure migration strategy for Red Hat Enterprise Linux and MySQL database workloads using Azure Virtual Machines, and Azure Database for MySQL.
 
-At the end of this whiteboard design session, you will be better able to [deliver, demonstrate, solve, present, migrate, build, design, architect, construct, modify] ….
+### Whiteboard design session
 
-Continue to the [Whiteboard design session](https://github.com/microsoft/MCW-XXXXXXXXXXXXXX/Whiteboard%20design%20session) documents folder.
+In this whiteboard design session, you will learn to design a strategy for migrating existing on-premises Red Hat Enterprise Linux (RHEL) and MySQL database workloads to Azure. Throughout the whiteboard design session, you will look at the virtual machine (VM) pricing and migrating MySQL database workloads to Azure.
 
-### Hands-on lab *(this will go in the readme and in the HOL document)*
-In this hands-on lab, you will migrate an existing on-premises enterprise data warehouse to the cloud. You will investigate the current data warehouse to identify any incompatibilities, you will export the data from the on-premises data warehouse and transfer it to Azure Blob Storage. Then you will load the data into the warehouse. Finally, you will integrate the warehouse by migrating ETL to Azure Data Factory and supporting ad-hoc access by implementing Azure Analysis Services.
+At the end of the workshop, you will be better able to design a migration strategy for Red Hat Enterprise Linux (RHEL) workloads to Azure VMs and MySQL database workloads to Azure Database for MySQL.
 
-At the end of this hands-on lab, you will be better able to [deliver, demonstrate, solve, present, migrate, build, design, architect, construct, modify] ….
-
-Continue to the [Hands-on lab](https://github.com/microsoft/MCW-XXXXXXXXX/Hands-on%20lab) documents folder.
+Continue to the [Whiteboard design session](Whiteboard%20design%20session) documents folder.
 
 ## Azure services and related products
-*Please list the services and products that are highlighted in the workshop. For example:*
--	Azure SQL Data Warehouse
--	Azure Data Factory
--	Azure Analysis Services
--	Azure Storage
+
+- Azure VMs
+- Azure Hybrid Benefit (AHB)
+- Azure Database for MySQL
+- Azure Networking
+- Azure Database Migration Service
 
 ## Azure solutions
-*This is an internal reference and will be updated by project PM.*
+
+DC Migration
 
 ## Related references
-*This should be a list of and links to prereqs, architectural diagrams, supporting docs, or briefing decks related to the material.* 
+
 - [MCW](https://github.com/Microsoft/MCW)
+- [Hub-spoke network topology in Azure](https://learn.microsoft.com/azure/architecture/reference-architectures/hybrid-networking/hub-spoke)
+- [What is Azure Database for MySQL?](https://learn.microsoft.com/azure/mysql/single-server/overview)
+- [Azure Database Migration Service](https://azure.microsoft.com/products/database-migration/#overview)
 
 ## Help & Support
 
