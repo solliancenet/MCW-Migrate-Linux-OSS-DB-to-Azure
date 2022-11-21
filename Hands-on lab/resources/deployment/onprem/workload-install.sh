@@ -12,15 +12,12 @@ echo "LC_ALL=en_US.utf-8" >> /etc/environment
 echo "LANG=en_US.utf-8" >> /etc/environment
 
 sudo yum install -y httpd mariadb-server php php-cli php-gd php-common php-ldap php-pdo php-pear php-snmp php-xml php-mbstring git
-
 sudo yum install php-mysqlnd -y
 sudo yum install php-gmp -y
 
-
-
-
 # Update /etc/httpd/conf/httpd.conf
 cd /etc/httpd/conf/
+rm -f httpd.conf
 wget https://raw.githubusercontent.com/solliancenet/MCW-Migrate-Linux-OSS-DB-to-Azure/lab/Hands-on%20lab/resources/deployment/onprem/httpd.conf
 
 
