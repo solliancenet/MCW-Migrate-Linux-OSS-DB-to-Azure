@@ -33,14 +33,23 @@ sudo firewall-cmd --reload
 sudo systemctl start mariadb
 sudo systemctl enable mariadb
 
+
+
 # Set MariaDB root password
+sudo yum install expect -y
 SECURE_MYSQL=$(expect -c "
 set timeout 10
 spawn mysql_secure_installation
 expect \"Enter current password for root (enter for none):\"
-send \"${pwd}\r\"
-expect \"Change the root password?\"
+send \"\r\"
+expect \"Switch to unix_socket authentication\"
 send \"n\r\"
+expect \"Change the root password?\"
+send \"y\r\"
+expect \"New password:\"
+send \"demo\!pass123\r\"
+expect \"Re-enter new password:\"
+send \"demo\!pass123\r\"
 expect \"Remove anonymous users?\"
 send \"y\r\"
 expect \"Disallow root login remotely?\"
