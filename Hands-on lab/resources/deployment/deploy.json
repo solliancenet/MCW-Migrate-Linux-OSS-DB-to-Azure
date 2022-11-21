@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.10.61.36676",
-      "templateHash": "2373985132713365169"
+      "templateHash": "11286341804631824591"
     }
   },
   "parameters": {
@@ -177,7 +177,7 @@
       "location": "[variables('location')]",
       "tags": "[variables('tags')]",
       "sku": {
-        "name": "Basic"
+        "name": "Standard"
       },
       "properties": {
         "ipConfigurations": [
@@ -226,6 +226,9 @@
           {
             "name": "ipconfig1",
             "properties": {
+              "publicIPAddress": {
+                "id": "[format('{0}', resourceId('Microsoft.Network/publicIPAddresses', format('{0}pip', variables('onpremWorkloadVMNamePrefix'))))]"
+              },
               "subnet": {
                 "id": "[format('{0}/subnets/default', resourceId('Microsoft.Network/virtualNetworks', format('{0}vnet', variables('onpremNamePrefix'))))]"
               },
@@ -239,8 +242,24 @@
       },
       "dependsOn": [
         "[resourceId('Microsoft.Network/virtualNetworks', format('{0}vnet', variables('onpremNamePrefix')))]",
-        "[resourceId('Microsoft.Network/networkSecurityGroups', format('{0}nsg', variables('onpremWorkloadVMNamePrefix')))]"
+        "[resourceId('Microsoft.Network/networkSecurityGroups', format('{0}nsg', variables('onpremWorkloadVMNamePrefix')))]",
+        "[resourceId('Microsoft.Network/publicIPAddresses', format('{0}pip', variables('onpremWorkloadVMNamePrefix')))]"
       ]
+    },
+    {
+      "type": "Microsoft.Network/publicIPAddresses",
+      "apiVersion": "2020-11-01",
+      "name": "[format('{0}pip', variables('onpremWorkloadVMNamePrefix'))]",
+      "location": "[variables('location')]",
+      "tags": "[variables('tags')]",
+      "sku": {
+        "name": "Standard",
+        "tier": "Regional"
+      },
+      "properties": {
+        "publicIPAddressVersion": "IPv4",
+        "publicIPAllocationMethod": "Static"
+      }
     },
     {
       "type": "Microsoft.Network/networkSecurityGroups",
@@ -285,7 +304,7 @@
               "sourceAddressPrefix": "*",
               "destinationAddressPrefix": "*",
               "access": "Allow",
-              "priority": 200,
+              "priority": 300,
               "direction": "Inbound"
             }
           }
