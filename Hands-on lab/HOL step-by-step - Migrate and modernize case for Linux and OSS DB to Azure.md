@@ -139,7 +139,7 @@ In this task, you will create a new Red Hat Enterprise Linux virtual machine (VM
 
     ![Public IP selected](images/2022-11-20-21-30-21.png "Public IP selected")
 
-11. For the **Select inbound ports**, select the **HTTP (80)** port to allow HTTP traffic through the Network Security Group firewall to reach the VM.
+11. For the **Select inbound ports**, select the **HTTP (80)** and **SSH (2)** ports to allow both HTTP and SSH traffic through the Network Security Group firewall to reach the VM.
 
     ![Inbound ports are set](images/2022-11-20-21-32-39.png "Inbound ports are set")
 
@@ -159,23 +159,49 @@ In this task, you will use Azure Bastion to connect to the VM over SSH and insta
 
     ![Virtual machine pane is open](images/2022-11-20-21-42-39.png.png "Virtual machine pane is open")
 
-2. On the left, under the **Operations** section, select **Bastion**.
+2. On the **Overview** pane of the **Virtual machine** blade, locate and copy the **Public IP Address** for the VM. This will be used to connect to the VM using SSH.
 
-    ![Bastion link](images/2022-11-20-21-45-08.png "Bastion link")
+    ![VM Public IP Address](images/2022-11-21-16-45-28.png "VM Public IP Address")
 
-3. On the **Bastion** pane, enter the **Username** and **Password** that was set for the Administrator account of the VM when it was created, then select **Connect**.
+3. At the top of the Azure Portal, select the **Cloud Shell** icon to open up the Azure Cloud Shell.
 
-    ![Bastion pane with username and password entered](images/2022-11-20-21-47-22.png "Bastion pane with username and password entered")
+    ![Cloud Shell icon](images/2022-11-21-16-46-35.png "Cloud Shell icon")
 
-    > **Note**: The Azure Bastion instance named `terrafirm-hub-bastion` was previously created with the Before the Hands-on lab setup. This is a required resource for using Azure Bastion to securely connect to Azure VMs using SSH from within the Azure Portal.
+4. Within the **Cloud Shell**, enter the following `ssh` command to connect to the VM using SSH. Be sure to replace the `<ip-address>` placeholder with the **Public IP Address** that was just copied for the VM.
 
-4. \[TODO: Azure Bastion isn't giving the SSH option for some reason...\]
+    ```bash
+    ssh demouser@<ip-address>
+    ```
+
+5. When prompted, enter `y` and press Enter to access the certificate warning for this VM. Then continue by entering the **Password** for the VM.
+
+    ![Cloud Shell with SSH certificate and password prompt](images/2022-11-21-16-49-59.png "Cloud Shell with SSH certificate and password prompt")
+
+    > **Note**: If you followed the previous suggestions for the VM username and password, then the password for the VM will be `demo!pass123`. Otherwise, enter the password you chose when provisioning the VM.
+
+6. Once connected to the VM via SSH, execute the following commands that will download an install script and run it that will install the web application on the VM:
+
+    ```bash
+    wget https://raw.githubusercontent.com/solliancenet/MCW-Migrate-Linux-OSS-DB-to-Azure/lab/Hands-on%20lab/resources/deployment/install-phpipam.sh
+    chmod +x install-phpipam.sh
+    sudo ./install-phpipam.sh
+    ```
+
+7. Once the script completes, open a new browser tab, and navigate to the following URL to test that the web application is installed. Be sure to use `http://` since the web application is not currently configured for TLS/SSL.
+
+    ```
+    http://<ip-address>
+    ```
+
+8. The web application should currently look similar to the following screenshot. This will indicate the application is installed, but not yet configured for a database. The database still needs to be migrated for the application.
+
+    ![web application in web browser](images/2022-11-21-16-54-27.png "web application in web browser")
 
 ## Exercise 2: MySQL database migration
 
 Duration: 60 minutes
 
-\[insert your custom Hands-on lab content here . . . \]
+In this exercise, you will migrate the on-premises MySQL database for the web application workload to Azure. The Azure Database Migration Service will be used to perform the database migration from the MySQL server on-premises to the Azure Database for MySQL service.
 
 ### Task 1: Create Database for MySQL resource
 
