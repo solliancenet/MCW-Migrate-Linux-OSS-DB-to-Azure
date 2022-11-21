@@ -12,7 +12,6 @@ Before the hands-on lab setup guide
 November 2022
 </div>
 
-
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
 
 Microsoft may have patents, patent applications, trademarks, copyrights, or other intellectual property rights covering subject matter in this document. Except as expressly provided in any written license agreement from Microsoft, the furnishing of this document does not give you any license to these patents, trademarks, copyrights, or other intellectual property.
@@ -46,9 +45,9 @@ Duration: 30 minutes
 
 ### Task 1: Create existing resources
 
-In this task, you will leverage a custom Azure Resource Manager (ARM) template to deploy the existing Azure resources and a simulated on-premises environment for Tailspin Toys.
+In this task, you will leverage a custom Azure Resource Manager (ARM) template to deploy the existing Azure resources and a simulated on-premises environment for Terra Firm.
 
-1. Open a browser using "InPrivate" or "Incognito" mode, and navigate to the ARM template: [ARM Template on GitHub](https://github.com/solliancenet/Building-the-business-migration-case-with-Windows-Server-and-SQL-Server/tree/lab/Hands-on%20lab/resources/deployment).
+1. Open a browser using "InPrivate" or "Incognito" mode, and navigate to the ARM template: [ARM Template on GitHub](https://github.com/solliancenet/MCW-Migrate-Linux-OSS-DB-to-Azure/tree/lab/Hands-on%20lab/resources/deployment).
 
 2. Select **Deploy to Azure**. This will open a new browser tab to the Azure Portal for custom deployments.
 
@@ -59,7 +58,7 @@ In this task, you will leverage a custom Azure Resource Manager (ARM) template t
 4. Fill in the required ARM template parameters.
     - Create a new **Resource group**.
     - Select a **Region**
-    - Specify a **Resource Name Base** (specify a base value that includes your initials to keep unique to prevent naming conflicts, for example, `tailspincp`).
+    - Specify a **Resource Name Base** (specify a base value that includes your initials to keep unique to prevent naming conflicts, for example, `terrafirmcp`).
     - Select **Review + create**
 
 5. Agree to the Terms and conditions and select **Create**.

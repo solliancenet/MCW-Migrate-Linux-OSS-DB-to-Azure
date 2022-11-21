@@ -2,7 +2,7 @@
 
 
 # username="demouser"
-# pwd="demo\!pass123"
+pwd="demo\!pass123"
 
 
 
@@ -21,7 +21,7 @@ sudo yum install php-gmp -y
 
 # Update /etc/httpd/conf/httpd.conf
 cd /etc/httpd/conf/
-wget http://github.com/org/repo/Hands-on lab/resources/deployment/onprem/httpd.conf
+wget https://raw.githubusercontent.com/solliancenet/MCW-Migrate-Linux-OSS-DB-to-Azure/lab/Hands-on%20lab/resources/deployment/onprem/httpd.conf
 
 
 # Start Apache
@@ -54,6 +54,8 @@ expect \"Reload privilege tables now?\"
 send \"y\r\"
 expect eof
 ")
+
+# sudo mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${pwd}'; flush privileges;"
 
 # Install phpipam
 # Download phpipam release

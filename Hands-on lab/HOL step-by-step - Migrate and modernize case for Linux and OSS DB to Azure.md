@@ -32,38 +32,50 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Solution architecture](#solution-architecture)
     - [Requirements](#requirements)
     - [Before the hands-on lab](#before-the-hands-on-lab)
-    - [Exercise 1: Exercise name](#exercise-1-exercise-name)
-        - [Task 1: Task name](#task-1-task-name)
-        - [Task 2: Task name](#task-2-task-name)
-    - [Exercise 2: Exercise name](#exercise-2-exercise-name)
-        - [Task 1: Task name](#task-1-task-name-1)
-        - [Task 2: Task name](#task-2-task-name-1)
-    - [Exercise 3: Exercise name](#exercise-3-exercise-name)
-        - [Task 1: Task name](#task-1-task-name-2)
-        - [Task 2: Task name](#task-2-task-name-2)
+    - [Exercise 1: Create VM to migrate web application](#exercise-1-create-vm-to-migrate-web-application)
+        - [Task 1: Create Red Hat Enterprise Linux VM for application hosting](#task-1-create-red-hat-enterprise-linux-vm-for-application-hosting)
+        - [Task 2: Install web application](#task-2-install-web-application)
+    - [Exercise 2: MySQL database migration](#exercise-2-exercise-name)
+        - [Task 1: Create Database for MySQL resource](#task-1-create-database-for-mysql-resource)
+        - [Task 2: Create Azure Database Migration Service](#task-2-create-azure-database-migration-service)
+        - [Task 3: Migration MySQL database to Azure](#task-3-migration-mysql-database-to-azure)
     - [After the hands-on lab](#after-the-hands-on-lab)
-        - [Task 1: Task name](#task-1-task-name-3)
-        - [Task 2: Task name](#task-2-task-name-3)
+        - [Task 1: Delete resource group to remove the lab environment](#task-1-delete-resource-group-to-remove-the-lab-environment)
 
 <!-- /TOC -->
 
 # Migrate and modernize case for Linux and OSS DB to Azure hands-on lab step-by-step
 
-## Abstract and learning objectives 
+## Abstract and learning objectives
 
-\[Insert what is trying to be solved for by using this workshop. . . \]
+In this hands-on lab, you will perform steps to migrate Red Hat Enterprise Linux (RHEL) and MySQL database workloads to Azure. You will go through provisioning a Red Hat Enterprise Linux VM, and migrate MySQL database to Azure Database for MySQL.
 
 ## Overview
 
-\[insert your custom workshop content here . . . \]
+In this hands-on lab, you will perform steps to migrate Red Hat Enterprise Linux (RHEL) and MySQL database workloads to Azure. You will go through provisioning a Red Hat Enterprise Linux VM, and migrate MySQL database to Azure Database for MySQL.
+
+Terra Firm already has a Hub and Spoke network set up in Azure with Azure Bastion for enabling remote management of Azure VM using Azure Bastion. The Azure resources provisioned throughout this lab will be deployed to this environment.
+
+At the end of this hands-on lab, you will be better able to set up a Red Hat Enterprise Linux (RHEL) VM for application migration to Azure, and migrate an on-premises MySQL database to Azure Database for MySQL.
 
 ## Solution architecture
 
-\[Insert your end-solution architecture here. . .\]
+![](../Whiteboard%20design%20session/images/PreferredSolutionDiagram.jpg "Preferred solution diagram")
+
+These are the components of the preferred solution diagram:
+
+- Terra Firm Laboratories has a Hub and Spoke networking setup with Azure ExpressRoute connected to Azure
+- The PHP web applications has been migrated to Azure and is running in Azure Virtual Machines hosted within a Spoke VNet in Azure that is peered with the Hub VNet.
+- The MySQL database has been migrated to Azure Database for MySQL, and is integrated with the Spoke VNet in Azure that is peered with the Hub VNet and is accessible from the web application.
+- Each application in Azure is contained within its own Subnet with Network Security Groups securing them accordingly.
+- Other components that may be setup up according to the clients security requirements are:
+    - Azure Bastion for secure SSH access to Azure VMs
+    - Azure Firewall to protect the front end web applications (a common component to use in a secure Azure networking model)
+    - Azure Monitor setup to implement monitoring of Azure VMs
 
 ## Requirements
 
-1.  Number and insert your custom workshop content here . . . 
+- You must have a working Azure subscription to carry out this hands-on lab step-by-step without a spending cap to deploy the Barracuda firewall from the Azure Marketplace.
 
 ## Before the hands-on lab
 
@@ -71,94 +83,221 @@ Refer to the Before the hands-on lab setup guide manual before continuing to the
 
 To author: remove this section if you do not require environment setup instructions.
 
-## Exercise 1: Exercise name
+## Exercise 1: Create VM to migrate web application
 
-Duration: X minutes
+Duration: 45 minutes
+
+In this exercise, you will create a new Red Hat Enterprise Linux virtual machine (VM) that will be the destination for migrating the on-premises Web Application to Azure, and then you will use Azure Bastion to connect to the VM over SSH. Azure Bastion will allow secure remote connections to the VM for Administrators.
+
+### Task 1: Create Red Hat Enterprise Linux VM for application hosting
+
+In this task, you will create a new Red Hat Enterprise Linux virtual machine (VM) that will be the destination for migrating the on-premises Web Application to Azure.
+
+1. Sign in to the [Azure Portal](https://portal.azure.com). Ensure that you're using a subscription associated with the same resources you created during the Before the hands-on lab set up.
+
+2. On the **Home** page within the Azure Portal, towards the top, select **Create a resource**.
+
+    ![Create a resource on Azure Portal Home page.](images/2022-11-20-21-08-40.png "Create a resource on Azure Portal Home page.")
+
+3. Within the **Search services and marketplace** field, type **Red Hat Enterprise Linux** and press Enter to search the marketplace, then select **Red Hat Enterprise Linux**.
+
+    ![Red Hat Enterprise Linux is highlighted](images/2022-11-20-21-10-49.png "Red Hat Enterprise Linux is highlighted")
+
+4. Choose **Red Hat Enterprise Linux 9.0 (LVM)** then select **Create**.
+
+5. On the **Create a virtual machine** pane, set the following values to configure the new virtual machine:
+
+    - **Resource group**: Select the resource group that you created for this lab. Such as `terrafirm-rg`.
+    - **Virtual machine name**: Give the VM a unique name, such as `terrafirm-webapp-vm`.
+    - **Region**: Select the Azure Region that was used to create the resource group.
+    - **Image**: Verify the image is set to **Red Hat Enterprise Linux 9.0 (LVM)**.
+
+    ![Create a virtual machine with fields set.](images/2022-11-20-21-15-15.png "Create a virtual machine with fields set.")
+
+6. Set the **Size** field by selecting the **Standard_D4s_v5** virtual machine size.
+
+    ![VM size is set.](images/2022-11-20-21-20-19.png "VM size is set.")
+
+7. Set the **Authentication type** to **Password**, then enter a **Username** and **Password** for the VM administrator account.
+
+    ![Administrator account credentials set.](images/2022-11-20-21-21-51.png "Administrator account credentials set.")
+
+    > **Note**: Be sure to save the Username and Password for the VM, so it can be used later. A recommendation for an easy to remember Username is `demouser` and Password is `demo!pass123`.
+
+8. Select **Next** until you are navigated to the **Networking** tab fo the **Create a virtual machine** page.
+
+    ![Networking tab is selected.](images/2022-11-20-21-26-00.png "Networking tab is selected.")
+
+9. Provision the VM in the Spoke VNet in Azure by selecting the following values under the **Network interface** section:
+
+    - **Virtual network**: Select the Spoke VNet that was created for this lab. Its name will be similar to `terrafirm-spoke-vnet`
+    - **Subnet**: `default (10.2.0.0/24)`
+
+    ![Network interface fields set.](images/2022-11-20-21-28-50.png "Network interface fields set.")
+
+10. For the **Public IP**, ensure that a **new** Public IP is selected so a Public IP is provisioned to enable Internet access to the VM. This will be used to access the Web Application over HTTP.
+
+    ![Public IP selected](images/2022-11-20-21-30-21.png "Public IP selected")
+
+11. For the **Select inbound ports**, select the **HTTP (80)** port to allow HTTP traffic through the Network Security Group firewall to reach the VM.
+
+    ![Inbound ports are set](images/2022-11-20-21-32-39.png "Inbound ports are set")
+
+12. Select **Review + create** to review the virtual machine settings.
+
+    ![Review + create button](images/2022-11-20-21-36-24.png "Review + create button")
+
+13. Select **Create** to begin provisioning the virtual machine once the **Validation passed** message is shown.
+
+    ![Validation passed and create button](images/2022-11-20-21-38-48.png "Validation passed and create button")
+
+### Task 2: Install web application
+
+In this task, you will use Azure Bastion to connect to the VM over SSH and install the web application.
+
+1. In the Azure Portal, navigate to the newly created **Virtual Machine**.
+
+    ![Virtual machine pane is open](images/2022-11-20-21-42-39.png.png "Virtual machine pane is open")
+
+2. On the left, under the **Operations** section, select **Bastion**.
+
+    ![Bastion link](images/2022-11-20-21-45-08.png "Bastion link")
+
+3. On the **Bastion** pane, enter the **Username** and **Password** that was set for the Administrator account of the VM when it was created, then select **Connect**.
+
+    ![Bastion pane with username and password entered](images/2022-11-20-21-47-22.png "Bastion pane with username and password entered")
+
+    > **Note**: The Azure Bastion instance named `terrafirm-hub-bastion` was previously created with the Before the Hands-on lab setup. This is a required resource for using Azure Bastion to securely connect to Azure VMs using SSH from within the Azure Portal.
+
+4. \[TODO: Azure Bastion isn't giving the SSH option for some reason...\]
+
+## Exercise 2: MySQL database migration
+
+Duration: 60 minutes
 
 \[insert your custom Hands-on lab content here . . . \]
 
-### Task 1: Task name
+### Task 1: Create Database for MySQL resource
 
-1.  Number and insert your custom workshop content here . . . 
+1. Sign in to the [Azure Portal](https://portal.azure.com). Ensure that you're using a subscription associated with the same resources you created during the Before the hands-on lab setup.
 
-    - Insert content here
+2. On the **Home** page within the Azure Portal, towards the top, select **Create a resource**.
 
-        -  
+    ![Create a resource on Azure Portal Home page.](images/2022-11-20-21-08-40.png "Create a resource on Azure Portal Home page.")
 
-### Task 2: Task name
+3. Within the **Search services and marketplace** field, type **MySQL**, press Enter, then select **Azure Database for MySQL** in the search results.
 
-1.  Number and insert your custom workshop content here . . . 
+    ![Azure Database for MySQL in the marketplace](images/2022-11-20-22-24-33.png "Azure Database for MySQL in the marketplace")
 
-    - Insert content here
+4. Select **Create**.
 
-        -  
+5. On the **Select Azure Database for MySQL deployment option** pane, select the **Resource type** of **Flexible server**, then select **Create**.
+
+    ![Flexible server is selected and create button is highlighted](images/2022-11-20-22-27-13.png "Flexible server is selected and create button is highlighted")
+
+6. On the **Flexible server** pane, select the following values:
+
+    - **Resource group**: Select the resource group that you created for this lab. Such as `terrafirm-rg`.
+    - **Server name**: Enter a unique name, such as `terrafirm-mysql-db`.
+    - **Region**: Select the Azure Region that was used to create the resource group.
+    - **MySQL version**: `8.0`
+
+    ![Flexible server pane with values entered](images/2022-11-20-22-32-44.png "Flexible server pane with values entered")
+
+7. Under **Administrator account**, set the **Admin username** and **Password** for the MySQL admin account.
+
+    ![Administrator account credentials set.](images/2022-11-20-22-37-20.png "Administrator account credentials set.")
+
+    > **Note**: Be sure to save the **Admin username** and **Password**, so it can be used later. A recommendation for an easy to remember Username is `mysqladmin` and Password is `demo!pass123`.
+
+8. Select **Next: Networking >**.
+
+    ![Next Networking button](images/2022-11-20-22-41-09.png "Next Networking button")
+
+9. On the **Networking** tab, under **Firewall rules**, select the checkbox for **Allow public access from any Azure service within Azure to this server**.
+
+    ![Allow public access from any Azure service within Azure to this server is checked](images/2022-11-20-22-44-09.png "Allow public access from any Azure service within Azure to this server is checked")
+
+10. Select **Review + create**.
+
+    ![Review + create button](images/2022-11-20-22-44-57.png "Review + create button")
+
+11. Select **Create** to provision the service.
+
+    ![Review + create screen with Create button](images/2022-11-20-22-46-07.png "Review + create screen with Create button")
+
+### Task 2: Create Azure Database Migration Service
+
+1. On the **Home** page within the Azure Portal, towards the top, select **Create a resource**.
+
+    ![Create a resource on Azure Portal Home page.](images/2022-11-20-21-08-40.png "Create a resource on Azure Portal Home page.")
+
+2. Within the **Search services and marketplace** field, type **Azure Database Migration**, press Enter, then select it in the search results.
+
+    ![Azure Database Migration Service](images/2022-11-20-23-04-06.png "Azure Database Migration Service")
+
+3. Select **Create**.
+
+4. On the **Select migration scenario and Database Migration Service** pane, select the following values:
+
+    - **Source server type**: `MySQL`
+    - **Target server type**: `Azure Database for MySQL`
+
+    ![Source and Target type selected for MySQL](images/2022-11-20-23-06-38.png "Source and Target type selected for MySQL")
+
+5. Select the **Select** button.
+
+    ![Select button](images/2022-11-20-23-08-29.png "Select button")
+
+6. On the **Create Migration Service** pane, select the following values:
+
+    - **Resource group**: Select the resource group that you created for this lab. Such as `terrafirm-rg`.
+    - **Migration service name**: Enter a unique name, such as `terrafirm-database-migration`.
+    - **Location**: Select the Azure Region that was used to create the resource group.
+
+    ![Create Migration Service pane with values entered](images/2022-11-20-23-10-49.png "Create Migration Service pane with values entered")
+
+7. Select **Next: Networking >>**.
+
+    ![Next Networking button](images/2022-11-20-23-17-04.png "Next Networking button")
+
+8. On the **Networking** tab, select the **terrafirm-hub-vnet/hub** VNet and Subnet.
+
+    ![VNet selected](images/2022-11-20-23-19-09.png "VNet selected")
+
+9. Select **Review + create**.
+
+    ![Review + create button](images/2022-11-20-23-18-39.png "Review + create button")
+
+10. Select **Create** to provision the service.
+
+    ![Create button is highlighted](images/2022-11-20-23-21-18.png "Create button is highlighted")
+
+### Task 3: Migration MySQL database to Azure
+
+1. 
 
 
-## Exercise 2: Exercise name
+## After the hands-on lab
 
-Duration: X minutes
+Duration: 15 minutes
 
-\[insert your custom Hands-on lab content here . . . \]
+### Task 1: Delete resource group to remove the lab environment
 
-### Task 1: Task name
+1. Go to the **Azure Portal**.
 
-1.  Number and insert your custom workshop content here . . . 
+2. Go to your **Resource groups**.
 
-    -  Insert content here
+3. Select the **Resource group** you created.
 
-        -  
+    ![Resource group list in Azure Portal](images/2022-11-20-22-01-36.png "Resource group list in Azure Portal")
 
-### Task 2: Task name
+4. Select **Delete Resource group**.
 
-1.  Number and insert your custom workshop content here . . . 
+    ![Resource group pane with Delete button highlighted](images/2022-11-20-22-02-33.png "Resource group pane with Delete button highlighted")
 
-    -  Insert content here
+5. Enter the name of the **Resource group** and select **Delete**.
 
-        -  
-
-
-## Exercise 3: Exercise name
-
-Duration: X minutes
-
-\[insert your custom Hands-on lab content here . . .\]
-
-### Task 1: Task name
-
-1.  Number and insert your custom workshop content here . . .
-
-    -  Insert content here
-
-        -  
-        
-### Task 2: Task name
-
-1.  Number and insert your custom workshop content here . . .
-
-    -  Insert content here
-
-        -  
-        
-## After the hands-on lab 
-
-Duration: X minutes
-
-\[insert your custom Hands-on lab content here . . .\]
-
-### Task 1: Task name
-
-1.  Number and insert your custom workshop content here . . .
-
-    -  Insert content here
-
-        -  
-
-### Task 2: Task name
-
-1.  Number and insert your custom workshop content here . . .
-
-    -  Insert content here
-
-        -    
+    ![Delete resource group confirmation prompt](images/2022-11-20-22-03-49.png "Delete resource group confirmation prompt")
 
 You should follow all steps provided *after* attending the Hands-on lab.

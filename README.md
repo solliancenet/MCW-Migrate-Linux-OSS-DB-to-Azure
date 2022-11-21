@@ -28,6 +28,16 @@ At the end of the workshop, you will be better able to design a migration strate
 
 Continue to the [Whiteboard design session](Whiteboard%20design%20session) documents folder.
 
+### Hands-on Lab
+
+In this hands-on lab, you will perform steps to migrate Red Hat Enterprise Linux (RHEL) and MySQL database workloads to Azure. You will go through provisioning a Red Hat Enterprise Linux VM, and migrate MySQL database to Azure Database for MySQL.
+
+Terra Firm already has a Hub and Spoke network set up in Azure with Azure Bastion for enabling remote management of Azure VM using Azure Bastion. The Azure resources provisioned throughout this lab will be deployed to this environment.
+
+At the end of this hands-on lab, you will be better able to set up a Red Hat Enterprise Linux (RHEL) VM for application migration to Azure, and migrate an on-premises MySQL database to Azure Database for MySQL.
+
+Continue to the [Hands-on lab](Hands-on%20lab) documents folder.
+
 ## Azure services and related products
 
 - Azure VMs
