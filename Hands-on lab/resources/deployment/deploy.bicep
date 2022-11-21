@@ -158,7 +158,7 @@ resource hub_bastion 'Microsoft.Network/bastionHosts@2020-11-01' = {
     location: location
     tags: tags
     sku: {
-        name: 'Basic'
+        name: 'Standard'
     }
     properties: {
         ipConfigurations: [
@@ -206,6 +206,9 @@ resource onprem_workload_nic 'Microsoft.Network/networkInterfaces@2021-03-01' = 
             {
                 name: 'ipconfig1'
                 properties: {
+                    publicIPAddress: {
+                        id: '${onprem_workload_public_ip.id}'
+                    }
                     subnet: {
                         id: '${onprem_vnet.id}/subnets/default'
                     }
@@ -216,6 +219,20 @@ resource onprem_workload_nic 'Microsoft.Network/networkInterfaces@2021-03-01' = 
         networkSecurityGroup: {
             id: onprem_workload_nsg.id
         }
+    }
+}
+
+resource onprem_workload_public_ip 'Microsoft.Network/publicIPAddresses@2020-11-01' = {
+    name: '${onpremWorkloadVMNamePrefix}pip'
+    location: location
+    tags: tags
+    sku: {
+        name: 'Standard'
+        tier: 'Regional'
+    }
+    properties: {
+        publicIPAddressVersion: 'IPv4'
+        publicIPAllocationMethod: 'Static'
     }
 }
 
@@ -260,7 +277,7 @@ resource onprem_workload_nsg 'Microsoft.Network/networkSecurityGroups@2019-02-01
                     sourceAddressPrefix: '*'
                     destinationAddressPrefix: '*'
                     access: 'Allow'
-                    priority: 200
+                    priority: 300
                     direction: 'Inbound'
                 }
             }
