@@ -30,7 +30,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Requirements](#requirements)
     - [Before the hands-on lab](#before-the-hands-on-lab)
         - [Task 1: Create existing resources](#task-1-create-existing-resources)
-        - [Task 2: Configure On-Premises Web Application](#task-2-configure-on-premises-web-application)
+        - [Task 2: Verify On-Premises Web Application](#task-2-verify-on-premises-web-application)
 
 <!-- /TOC -->
 
@@ -70,12 +70,34 @@ In this task, you will leverage a custom Azure Resource Manager (ARM) template t
 
     Once the ARM template is deployed, the status will change to complete.
 
-### Task 2: Configure On-Premises Web Application
+### Task 2: Verify On-Premises Web Application
 
 In this task, you will configure the web application hosted on the simulated on-premises virtual machine that was provisioned by the ARM Template deployment.
 
-1. ?
+1. In the **Azure Poral**, navigate to the **Resource Group** that you created for this lab, then select the **On-premises Workload VM** named similar to `terrafirm-onprem-workload-vm`.
 
+    ![Resource group with on-premises workload VM highlighted](images/2022-11-21-22-49-18.png "Resource group with on-premises workload VM highlighted")
+
+2. On the **Virtual Machine** blade, locate and copy the **Public IP Address** for the VM.
+
+    ![Virtual machine blade with Public IP Address highlighted](images/2022-11-21-22-51-34.png "Virtual machine blade with Public IP Address highlighted")
+
+3. Open a new browser window, then navigate to the following `http://` URL to access the simulated on-premises web application provisioned for this lab. Be sure to replace the `<ip-address>` placeholder with the **Public IP Address** for the VM.
+
+    ```
+    http://<ip-address>
+    ```
+
+    > **Note**: If you get an error loading the web application, instead of a login page, then there was an error in provisioning. The easiest workaround is to delete the resource group and run the template deployment again.
+
+4. When the web application loads, you may enter the following credentials to login.
+
+    - **Username**: `Admin`
+    - **Password**: `ipamadmin`
+
+    ![Login page](images/2022-11-21-22-54-53.png "Login page")
+
+    > **Note**: The first time you login to the web application, it will prompt to change the Admin password. A recommended password to change it to is `demo!pass123` so it's easily remembered for the lab.
 
 At this point, things are ready for you to go through the Hands-on lab.
 
