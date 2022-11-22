@@ -27,6 +27,7 @@ sudo systemctl enable httpd
 
 sudo firewall-cmd --permanent --add-port=80/tcp
 sudo firewall-cmd --permanent --add-port=443/tcp
+sudo firewall-cmd --permanent --add-port=3306/tcp
 sudo firewall-cmd --reload
 
 # Start MariaDB
@@ -35,34 +36,11 @@ sudo systemctl enable mariadb
 
 
 
-# Set MariaDB root password
-# sudo yum install expect -y
-# SECURE_MYSQL=$(expect -c "
-# set timeout 10
-# spawn mysql_secure_installation
-# expect \"Enter current password for root (enter for none):\"
-# send \"\r\"
-# expect \"Switch to unix_socket authentication\"
-# send \"n\r\"
-# expect \"Change the root password?\"
-# send \"y\r\"
-# expect \"New password:\"
-# send \"demopass123\r\"
-# expect \"Re-enter new password:\"
-# send \"demopass123\r\"
-# expect \"Remove anonymous users?\"
-# send \"y\r\"
-# expect \"Disallow root login remotely?\"
-# send \"n\r\"
-# expect \"Remove test database and access to it?\"
-# send \"y\r\"
-# expect \"Reload privilege tables now?\"
-# send \"y\r\"
-# expect eof
-# ")
 
-# sudo mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${pwd}'; flush privileges;"
+sudo mysql -uroot -e "CREATE DATABASE phpipam;"
 sudo mysql -uroot -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('demopass123');"
+sudo mysql -uroot -e "GRANT ALL PRIVILEGES ON mysql.* TO 'root'@'%' IDENTIFIED BY 'demopass123';"
+sudo mysql -uroot -e "GRANT ALL PRIVILEGES ON phpipam.* TO 'root'@'%' IDENTIFIED BY 'demopass123'; FLUSH PRIVILEGES;"
 
 # Install phpipam
 # Download phpipam release
@@ -86,16 +64,13 @@ sudo chcon -t httpd_sys_rw_content_t css/images/logo/ -R
 cp config.dist.php config.php
 echo "\$allow_untested_php_versions=true;" >> /var/www/html/config.php
 
-
-
-
-# sed -i "s/^\(\$db\['user'\]\s*=\s*\).*\$/\1'${username}';/" config.php
-# sed -i "s/^\(\$db\['pass'\]\s*=\s*\).*\$/\1'${pwd}';/" config.php
+# sudo sed -i "s/^\(\$db\['host'\]\s*=\s*\).*\$/\1'localhost';/" config.php
+sudo sed -i "s/^\(\$db\['user'\]\s*=\s*\).*\$/\1'root';/" config.php
+sudo sed -i "s/^\(\$db\['pass'\]\s*=\s*\).*\$/\1'demopass123';/" config.php
+sudo sed -i "s/^\(\$db\['webhost'\]\s*=\s*\).*\$/\1'%';/" config.php
 # sed -i "s/^\(\$db\['name'\]\s*=\s*\).*\$/\1'ipam';/" config.php
 
-# create_db_query="CREATE DATABASE IF NOT EXISTS ipam DEFAULT CHARACTER SET utf8 default COLLATE utf8_bin;"
-# SQL_Q1=$(mysql -u root -p ${pwd} -e "${create_db_query}")
-# grant_db_query_all="GRANT ALL PRIVILEGES ON ${ipam}.* TO ${username}@'%' IDENTIFIED BY '${pwd}';"
-# SQL_Q2=$(mysql -u root -p ${pwd} -e "${grant_db_query_all}")
-# grant_db_query_local="GRANT ALL PRIVILEGES ON ipam.* TO ${username}@'localhost' IDENTIFIED BY '${pwd}';"
-# SQL_Q3=$(mysql -u root -p ${pwd} -e "${grant_db_query_local}")
+
+cd /var/www
+wget https://raw.githubusercontent.com/solliancenet/MCW-Migrate-Linux-OSS-DB-to-Azure/lab/Hands-on%20lab/resources/deployment/onprem/phpipam-create.sql
+sudo mysql -uroot -e "source /var/www/phpipam-create.sql"
