@@ -38,6 +38,9 @@ sudo dnf install mysql-server --allowerasing -y
 sudo systemctl start mysqld.service
 sudo systemctl enable mysqld.service
 
+echo "bind-address=*" | sudo tee --append /etc/my.cnf.d/mysql-server.cnf 
+sudo systemctl restart mysqld.service
+
 # Configure MySQL
 # sudo yum install expect -y
 # SECURE_MYSQL=$(expect -c "
