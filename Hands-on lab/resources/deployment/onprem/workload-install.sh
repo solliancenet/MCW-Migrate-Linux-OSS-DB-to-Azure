@@ -36,32 +36,33 @@ sudo systemctl enable mariadb
 
 
 # Set MariaDB root password
-sudo yum install expect -y
-SECURE_MYSQL=$(expect -c "
-set timeout 10
-spawn mysql_secure_installation
-expect \"Enter current password for root (enter for none):\"
-send \"\r\"
-expect \"Switch to unix_socket authentication\"
-send \"n\r\"
-expect \"Change the root password?\"
-send \"y\r\"
-expect \"New password:\"
-send \"demo\!pass123\r\"
-expect \"Re-enter new password:\"
-send \"demo\!pass123\r\"
-expect \"Remove anonymous users?\"
-send \"y\r\"
-expect \"Disallow root login remotely?\"
-send \"n\r\"
-expect \"Remove test database and access to it?\"
-send \"y\r\"
-expect \"Reload privilege tables now?\"
-send \"y\r\"
-expect eof
-")
+# sudo yum install expect -y
+# SECURE_MYSQL=$(expect -c "
+# set timeout 10
+# spawn mysql_secure_installation
+# expect \"Enter current password for root (enter for none):\"
+# send \"\r\"
+# expect \"Switch to unix_socket authentication\"
+# send \"n\r\"
+# expect \"Change the root password?\"
+# send \"y\r\"
+# expect \"New password:\"
+# send \"demopass123\r\"
+# expect \"Re-enter new password:\"
+# send \"demopass123\r\"
+# expect \"Remove anonymous users?\"
+# send \"y\r\"
+# expect \"Disallow root login remotely?\"
+# send \"n\r\"
+# expect \"Remove test database and access to it?\"
+# send \"y\r\"
+# expect \"Reload privilege tables now?\"
+# send \"y\r\"
+# expect eof
+# ")
 
 # sudo mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${pwd}'; flush privileges;"
+sudo mysql -uroot -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('demopass123');"
 
 # Install phpipam
 # Download phpipam release
