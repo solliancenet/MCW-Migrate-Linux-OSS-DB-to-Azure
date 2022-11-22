@@ -32,9 +32,9 @@ sudo firewall-cmd --reload
 
 
 # Install MySQL
-sudo dnf install mysql-server
+sudo dnf install mysql-server --allowerasing -y
 
-# Start MariaDB
+# Start MySQL
 sudo systemctl start mysqld.service
 sudo systemctl enable mysqld.service
 
@@ -61,10 +61,18 @@ sudo systemctl enable mysqld.service
 # ")
 
 sudo mysql -uroot -e "CREATE DATABASE phpipam;"
-sudo mysql -uroot -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('demopass123');"
-sudo mysql -uroot -e "GRANT ALL PRIVILEGES ON *.* to 'root'@'%' IDENTIFIED BY 'demopass123' with grant option;"
-# sudo mysql -uroot -e "GRANT ALL PRIVILEGES ON mysql.* TO 'root'@'%' IDENTIFIED BY 'demopass123';"
-sudo mysql -uroot -e "GRANT ALL PRIVILEGES ON phpipam.* TO 'root'@'%' IDENTIFIED BY 'demopass123'; FLUSH PRIVILEGES;"
+sudo mysql -uroot -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'demopass123';"
+sudo mysql -uroot -e "CREATE USER 'root'@'%' IDENTIFIED BY 'demopass123';"
+sudo mysql -uroot -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;"
+sudo mysql -uroot -e "FLUSH PRIVILEGES;"
+
+#sudo mysql -uroot -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('demopass123');"
+#sudo mysql -uroot -e "GRANT ALL PRIVILEGES ON *.* to 'root'@'%' IDENTIFIED BY 'demopass123' with grant option;"
+## sudo mysql -uroot -e "GRANT ALL PRIVILEGES ON mysql.* TO 'root'@'%' IDENTIFIED BY 'demopass123';"
+#sudo mysql -uroot -e "GRANT ALL PRIVILEGES ON phpipam.* TO 'root'@'%' IDENTIFIED BY 'demopass123'; FLUSH PRIVILEGES;"
+
+
+
 
 # Install phpipam
 # Download phpipam release
@@ -88,7 +96,7 @@ sudo chcon -t httpd_sys_rw_content_t css/images/logo/ -R
 cp config.dist.php config.php
 echo "\$allow_untested_php_versions=true;" >> /var/www/html/config.php
 
-# sudo sed -i "s/^\(\$db\['host'\]\s*=\s*\).*\$/\1'localhost';/" config.php
+sudo sed -i "s/^\(\$db\['host'\]\s*=\s*\).*\$/\1'localhost';/" config.php
 sudo sed -i "s/^\(\$db\['user'\]\s*=\s*\).*\$/\1'root';/" config.php
 sudo sed -i "s/^\(\$db\['pass'\]\s*=\s*\).*\$/\1'demopass123';/" config.php
 sudo sed -i "s/^\(\$db\['webhost'\]\s*=\s*\).*\$/\1'%';/" config.php
@@ -96,5 +104,9 @@ sudo sed -i "s/^\(\$db\['webhost'\]\s*=\s*\).*\$/\1'%';/" config.php
 
 
 cd /var/www
-wget https://raw.githubusercontent.com/solliancenet/MCW-Migrate-Linux-OSS-DB-to-Azure/lab/Hands-on%20lab/resources/deployment/onprem/phpipam-create.sql
-sudo mysql -uroot -e "source /var/www/phpipam-create.sql"
+sudo wget https://raw.githubusercontent.com/solliancenet/MCW-Migrate-Linux-OSS-DB-to-Azure/lab/Hands-on%20lab/resources/deployment/onprem/phpipam-create.sql
+sudo mysql -uroot -pdemopass123 -e "source /var/www/phpipam-create.sql"
+
+# default phpipam login
+# username: Admin
+# password: ipamadmin
