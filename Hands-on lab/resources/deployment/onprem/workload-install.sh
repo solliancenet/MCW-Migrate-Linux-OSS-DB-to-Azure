@@ -67,6 +67,8 @@ sudo mysql -uroot -e "CREATE DATABASE phpipam;"
 sudo mysql -uroot -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'demopass123';"
 sudo mysql -uroot -e "CREATE USER 'root'@'%' IDENTIFIED BY 'demopass123';"
 sudo mysql -uroot -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;"
+sudo mysql -uroot -e "GRANT ALL PRIVILEGES ON mysql.* TO 'root'@'%' WITH GRANT OPTION;"
+sudo mysql -uroot -e "GRANT ALL PRIVILEGES ON phpipam.* TO 'root'@'%' WITH GRANT OPTION;"
 sudo mysql -uroot -e "FLUSH PRIVILEGES;"
 
 #sudo mysql -uroot -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('demopass123');"
