@@ -65,10 +65,10 @@ At the end of this hands-on lab, you will be better able to set up a Red Hat Ent
 These are the components of the preferred solution diagram:
 
 - Terra Firm Laboratories has a Hub and Spoke networking setup with Azure ExpressRoute connected to Azure
-- The PHP web applications has been migrated to Azure and is running in Azure Virtual Machines hosted within a Spoke VNet in Azure that is peered with the Hub VNet.
+- The PHP web applications have been migrated to Azure and are running in Azure Virtual Machines hosted within a Spoke VNet in Azure that is peered with the Hub VNet.
 - The MySQL database has been migrated to Azure Database for MySQL, and is integrated with the Spoke VNet in Azure that is peered with the Hub VNet and is accessible from the web application.
 - Each application in Azure is contained within its own Subnet with Network Security Groups securing them accordingly.
-- Other components that may be setup up according to the clients security requirements are:
+- Other components that may be setup up according to the client's security requirements are:
     - Azure Bastion for secure SSH access to Azure VMs
     - Azure Firewall to protect the front end web applications (a common component to use in a secure Azure networking model)
     - Azure Monitor setup to implement monitoring of Azure VMs
@@ -303,7 +303,7 @@ In this task, you will create a new Red Hat Enterprise Linux virtual machine (VM
 
     > **Note**: Password authentication for the Linux VM is being used to simplify the lab. In a production environment, the best practice is to use SSH public key authentication.
 
-8. Select **Next** until you are navigated to the **Networking** tab fo the **Create a virtual machine** page.
+8. Select **Next** until you are navigated to the **Networking** tab for the **Create a virtual machine** page.
 
     ![Networking tab is selected.](images/2022-11-20-21-26-00.png "Networking tab is selected.")
 
