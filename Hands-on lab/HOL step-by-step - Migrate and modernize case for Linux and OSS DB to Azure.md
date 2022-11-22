@@ -262,7 +262,7 @@ In this exercise, you will migrate the on-premises MySQL database for the web ap
 
 ## Exercise 2: Create VM to migrate web application
 
-Duration: 45 minutes
+Duration: 60 minutes
 
 In this exercise, you will create a new Red Hat Enterprise Linux virtual machine (VM) that will be the destination for migrating the on-premises Web Application to Azure, and then you will use SSH to connect to the VM remotely.
 
