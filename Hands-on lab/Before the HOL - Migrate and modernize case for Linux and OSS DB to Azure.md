@@ -74,7 +74,7 @@ In this task, you will leverage a custom Azure Resource Manager (ARM) template t
 
 In this task, you will configure the web application hosted on the simulated on-premises virtual machine that was provisioned by the ARM Template deployment.
 
-1. In the **Azure Poral**, navigate to the **Resource Group** that you created for this lab, then select the **On-premises Workload VM** named similar to `terrafirm-onprem-workload-vm`.
+1. In the **Azure Portal**, navigate to the **Resource Group** that you created for this lab, then select the **On-premises Workload VM** named similar to `terrafirm-onprem-workload-vm`.
 
     ![Resource group with on-premises workload VM highlighted](images/2022-11-21-22-49-18.png "Resource group with on-premises workload VM highlighted")
 

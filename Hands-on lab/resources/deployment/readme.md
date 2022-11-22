@@ -4,7 +4,7 @@ This directory contains the Before Hands-on Lab setup deployment scripts for cre
 
 Click the button below to deploy the existing Terra Firm resources for the HOL to your Azure Subscription:
 
-[![Deploy To Azure](https://raw.githubusercontent.com/solliancenet/MCW-Migrate-Linux-OSS-DB-to-Azure/lab/Hands-on%20lab/images/deploytoazure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FSolliancenet%2FMCW-Migrate-Linux-OSS-DB-to-Azure/%2Flab%2FHands-on%20lab%2Fresources%2Fdeployment%2Fdeploy.json)
+[![Deploy To Azure](../../images/deploytoazure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsolliancenet%2FMCW-Migrate-Linux-OSS-DB-to-Azure%2Flab%2FHands-on%20lab%2Fresources%2Fdeployment%2Fdeploy.json)
 
 ## Notes
 

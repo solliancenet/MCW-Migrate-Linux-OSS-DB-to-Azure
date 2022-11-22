@@ -32,13 +32,13 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Solution architecture](#solution-architecture)
     - [Requirements](#requirements)
     - [Before the hands-on lab](#before-the-hands-on-lab)
-    - [Exercise 1: Create VM to migrate web application](#exercise-1-create-vm-to-migrate-web-application)
-        - [Task 1: Create Red Hat Enterprise Linux VM for application hosting](#task-1-create-red-hat-enterprise-linux-vm-for-application-hosting)
-        - [Task 2: Install web application](#task-2-install-web-application)
-    - [Exercise 2: MySQL database migration](#exercise-2-exercise-name)
+    - [Exercise 1: MySQL database migration](#exercise-1-mysql-database-migration)
         - [Task 1: Create Azure Database for MySQL](#task-1-create-azure-database-for-mysql)
         - [Task 2: Create Azure Database Migration Service](#task-2-create-azure-database-migration-service)
         - [Task 3: Migration MySQL database to Azure](#task-3-migration-mysql-database-to-azure)
+    - [Exercise 2: Create VM to migrate web application](#exercise-2-create-vm-to-migrate-web-application)
+        - [Task 1: Create Red Hat Enterprise Linux VM for application hosting](#task-1-create-red-hat-enterprise-linux-vm-for-application-hosting)
+        - [Task 2: Install web application](#task-2-install-web-application)
     - [After the hands-on lab](#after-the-hands-on-lab)
         - [Task 1: Delete resource group to remove the lab environment](#task-1-delete-resource-group-to-remove-the-lab-environment)
 
@@ -81,123 +81,7 @@ These are the components of the preferred solution diagram:
 
 Refer to the Before the hands-on lab setup guide manual before continuing to the lab exercises.
 
-To author: remove this section if you do not require environment setup instructions.
-
-## Exercise 1: Create VM to migrate web application
-
-Duration: 45 minutes
-
-In this exercise, you will create a new Red Hat Enterprise Linux virtual machine (VM) that will be the destination for migrating the on-premises Web Application to Azure, and then you will use Azure Bastion to connect to the VM over SSH. Azure Bastion will allow secure remote connections to the VM for Administrators.
-
-### Task 1: Create Red Hat Enterprise Linux VM for application hosting
-
-In this task, you will create a new Red Hat Enterprise Linux virtual machine (VM) that will be the destination for migrating the on-premises Web Application to Azure.
-
-1. Sign in to the [Azure Portal](https://portal.azure.com). Ensure that you're using a subscription associated with the same resources you created during the Before the hands-on lab set up.
-
-2. On the **Home** page within the Azure Portal, towards the top, select **Create a resource**.
-
-    ![Create a resource on Azure Portal Home page.](images/2022-11-20-21-08-40.png "Create a resource on Azure Portal Home page.")
-
-3. Within the **Search services and marketplace** field, type **Red Hat Enterprise Linux** and press Enter to search the marketplace, then select **Red Hat Enterprise Linux**.
-
-    ![Red Hat Enterprise Linux is highlighted](images/2022-11-20-21-10-49.png "Red Hat Enterprise Linux is highlighted")
-
-4. Choose **Red Hat Enterprise Linux 9.0 (LVM)** then select **Create**.
-
-5. On the **Create a virtual machine** pane, set the following values to configure the new virtual machine:
-
-    - **Resource group**: Select the resource group that you created for this lab. Such as `terrafirm-rg`.
-    - **Virtual machine name**: Give the VM a unique name, such as `terrafirm-webapp-vm`.
-    - **Region**: Select the Azure Region that was used to create the resource group.
-    - **Image**: Verify the image is set to **Red Hat Enterprise Linux 9.0 (LVM)**.
-
-    ![Create a virtual machine with fields set.](images/2022-11-20-21-15-15.png "Create a virtual machine with fields set.")
-
-6. Set the **Size** field by selecting the **Standard_D4s_v5** virtual machine size.
-
-    ![VM size is set.](images/2022-11-20-21-20-19.png "VM size is set.")
-
-7. Set the **Authentication type** to **Password**, then enter a **Username** and **Password** for the VM administrator account.
-
-    ![Administrator account credentials set.](images/2022-11-20-21-21-51.png "Administrator account credentials set.")
-
-    > **Note**: Be sure to save the Username and Password for the VM, so it can be used later. A recommendation for an easy to remember Username is `demouser` and Password is `demo!pass123`.
-
-8. Select **Next** until you are navigated to the **Networking** tab fo the **Create a virtual machine** page.
-
-    ![Networking tab is selected.](images/2022-11-20-21-26-00.png "Networking tab is selected.")
-
-9. Provision the VM in the Spoke VNet in Azure by selecting the following values under the **Network interface** section:
-
-    - **Virtual network**: Select the Spoke VNet that was created for this lab. Its name will be similar to `terrafirm-spoke-vnet`
-    - **Subnet**: `default (10.2.0.0/24)`
-
-    ![Network interface fields set.](images/2022-11-20-21-28-50.png "Network interface fields set.")
-
-10. For the **Public IP**, ensure that a **new** Public IP is selected so a Public IP is provisioned to enable Internet access to the VM. This will be used to access the Web Application over HTTP.
-
-    ![Public IP selected](images/2022-11-20-21-30-21.png "Public IP selected")
-
-11. For the **Select inbound ports**, select the **HTTP (80)** and **SSH (2)** ports to allow both HTTP and SSH traffic through the Network Security Group firewall to reach the VM.
-
-    ![Inbound ports are set](images/2022-11-20-21-32-39.png "Inbound ports are set")
-
-12. Select **Review + create** to review the virtual machine settings.
-
-    ![Review + create button](images/2022-11-20-21-36-24.png "Review + create button")
-
-13. Select **Create** to begin provisioning the virtual machine once the **Validation passed** message is shown.
-
-    ![Validation passed and create button](images/2022-11-20-21-38-48.png "Validation passed and create button")
-
-### Task 2: Install web application
-
-In this task, you will use Azure Bastion to connect to the VM over SSH and install the web application.
-
-1. In the Azure Portal, navigate to the newly created **Virtual Machine**.
-
-    ![Virtual machine pane is open](images/2022-11-20-21-42-39.png.png "Virtual machine pane is open")
-
-2. On the **Overview** pane of the **Virtual machine** blade, locate and copy the **Public IP Address** for the VM. This will be used to connect to the VM using SSH.
-
-    ![VM Public IP Address](images/2022-11-21-16-45-28.png "VM Public IP Address")
-
-3. At the top of the Azure Portal, select the **Cloud Shell** icon to open up the Azure Cloud Shell.
-
-    ![Cloud Shell icon](images/2022-11-21-16-46-35.png "Cloud Shell icon")
-
-4. Within the **Cloud Shell**, enter the following `ssh` command to connect to the VM using SSH. Be sure to replace the `<ip-address>` placeholder with the **Public IP Address** that was just copied for the VM.
-
-    ```bash
-    ssh demouser@<ip-address>
-    ```
-
-5. When prompted, enter `y` and press Enter to access the certificate warning for this VM. Then continue by entering the **Password** for the VM.
-
-    ![Cloud Shell with SSH certificate and password prompt](images/2022-11-21-16-49-59.png "Cloud Shell with SSH certificate and password prompt")
-
-    > **Note**: If you followed the previous suggestions for the VM username and password, then the password for the VM will be `demo!pass123`. Otherwise, enter the password you chose when provisioning the VM.
-
-6. Once connected to the VM via SSH, execute the following commands that will download an install script and run it that will install the web application on the VM:
-
-    ```bash
-    wget https://raw.githubusercontent.com/solliancenet/MCW-Migrate-Linux-OSS-DB-to-Azure/lab/Hands-on%20lab/resources/deployment/install-phpipam.sh
-    chmod +x install-phpipam.sh
-    sudo ./install-phpipam.sh
-    ```
-
-7. Once the script completes, open a new browser tab, and navigate to the following URL to test that the web application is installed. Be sure to use `http://` since the web application is not currently configured for TLS/SSL.
-
-    ```
-    http://<ip-address>
-    ```
-
-8. The web application should currently look similar to the following screenshot. This will indicate the application is installed, but not yet configured for a database. The database still needs to be migrated for the application.
-
-    ![web application in web browser](images/2022-11-21-16-54-27.png "web application in web browser")
-
-## Exercise 2: MySQL database migration
+## Exercise 1: MySQL database migration
 
 Duration: 60 minutes
 
@@ -252,15 +136,19 @@ In this exercise, you will migrate the on-premises MySQL database for the web ap
 
     ![Review + create screen with Create button](images/2022-11-20-22-46-07.png "Review + create screen with Create button")
 
-12. Once provisioning has completed navigate to the **Azure Database for MySQL** resource that was just created, then select **Databases** under **Settings** on the side of the pane.
+12. Once provisioning has completed navigate to the **Azure Database for MySQL** resource that was just created, copy and save the **Server name** for use later.
+
+    ![Azure Database for MySQL server name](images/2022-11-21-23-57-40.png "Azure Database for MySQL server name")
+
+13. Select **Databases** under **Settings** on the side of the pane.
 
     ![Databases link](images/2022-11-21-21-26-19.png "Databases link")
 
-13. Select **+ Add** to create a new database.
+14. Select **+ Add** to create a new database.
 
     ![Add database button](images/2022-11-21-21-27-38.png "Add database button")
 
-14. On the **Create Database** pane, enter `phpipam` in the **Name** field, then select **Save**. This will create a new MySQL database that will be the target for the database migration.
+15. On the **Create Database** pane, enter `phpipam` in the **Name** field, then select **Save**. This will create a new MySQL database that will be the target for the database migration.
 
     ![Create database pane with values entered](images/2022-11-21-21-28-24.png "Create database pane with values entered")
 
@@ -324,7 +212,7 @@ In this exercise, you will migrate the on-premises MySQL database for the web ap
     - **Target server type**: `Azure Database for MySQL (Single or Flexible)`
     - **Migration activity type**: `Offline data migration`
 
-    ![](images/2022-11-21-21-33-36.png "")
+    ![New migration project](images/2022-11-21-21-33-36.png "New migration project")
 
 3. Select **Create and run activity**.
 
@@ -336,10 +224,194 @@ In this exercise, you will migrate the on-premises MySQL database for the web ap
     - **Server port**: `3306`
     - **User name**: `root`
     - **Password**: `demopass123`
+    - **Encrypt connection**: Uncheck this box.
 
     ![Offline Data Migration Wizard select source tab with values entered](images/2022-11-21-21-41-26.png "Offline Data Migration Wizard select source tab with values entered")
 
-[TODO]
+5. On the **Select target** tab, enter the following values to select the **Azure Database for MySQL** service that was previously provisioned.
+
+    - **Location**: The Azure Region that's used for this lab.
+    - **Resource group**: The Resource Group for this lab, named similar to `terrafirm-rg`.
+    - **Azure Database for MySQL**: The Azure Database for MySQL service provisioned previously that is named similar to `terrafirm-mysql-db`.
+    - **User name**: `mysqladmin`
+    - **Password**: `demo!pass123`
+
+    > **Note**: If a different **User name** and **Password** were configured when provisioning the **Azure Database for MySQL** service, then use those credentials instead.
+
+    ![Select target tab with values entered](images/2022-11-21-23-37-12.png "Select target tab with values entered")
+
+6. On the **Select database** tab, ensure the `phpipam` database is selected for both the **Source Database** and **Target Database**, then select **Next: Select tables >>**.
+
+    ![phpipam source and target database is selected](images/2022-11-21-23-40-24.png "phpipam source and target database is selected")
+
+7. On the **Select tables** tab, expand the `phpipam` table, and make sure all tables are selected, then select **Review and start migration**.
+
+    ![All tables selected](images/2022-11-21-23-43-09.png "All tables selected")
+
+8. On the **Summary** tab, enter `phpipam` into the **Activity name** field, then select **Start migration**.
+
+    ![Summary tab](images/2022-11-21-23-44-56.png "Summary tab")
+
+9. A migration details pane will now display, showing the **Status** as **Pending** while the migration is running.
+
+    ![Migration pending](images/2022-11-21-23-46-20.png "Migration pending")
+
+10. After a minute, select **Refresh** to check if the migration has completed. Once complete, the **Status** will show as **Completed** and the **Migration details** will display the total number of tables that have been migrated.
+
+    ![Migration completed](images/2022-11-21-23-49-09.png "Migration completed")
+
+## Exercise 2: Create VM to migrate web application
+
+Duration: 45 minutes
+
+In this exercise, you will create a new Red Hat Enterprise Linux virtual machine (VM) that will be the destination for migrating the on-premises Web Application to Azure, and then you will use SSH to connect to the VM remotely.
+
+### Task 1: Create Red Hat Enterprise Linux VM for application hosting
+
+In this task, you will create a new Red Hat Enterprise Linux virtual machine (VM) that will be the destination for migrating the on-premises Web Application to Azure.
+
+1. Sign in to the [Azure Portal](https://portal.azure.com). Ensure that you're using a subscription associated with the same resources you created during the Before the hands-on lab set up.
+
+2. On the **Home** page within the Azure Portal, towards the top, select **Create a resource**.
+
+    ![Create a resource on Azure Portal Home page.](images/2022-11-20-21-08-40.png "Create a resource on Azure Portal Home page.")
+
+3. Within the **Search services and marketplace** field, type **Red Hat Enterprise Linux** and press Enter to search the marketplace, then select **Red Hat Enterprise Linux**.
+
+    ![Red Hat Enterprise Linux is highlighted](images/2022-11-20-21-10-49.png "Red Hat Enterprise Linux is highlighted")
+
+4. Choose **Red Hat Enterprise Linux 9.0 (LVM)** then select **Create**.
+
+5. On the **Create a virtual machine** pane, set the following values to configure the new virtual machine:
+
+    - **Resource group**: Select the resource group that you created for this lab. Such as `terrafirm-rg`.
+    - **Virtual machine name**: Give the VM a unique name, such as `terrafirm-webapp-vm`.
+    - **Region**: Select the Azure Region that was used to create the resource group.
+    - **Image**: Verify the image is set to `Red Hat Enterprise Linux 9.0 (LVM)`.
+
+    ![Create a virtual machine with fields set.](images/2022-11-20-21-15-15.png "Create a virtual machine with fields set.")
+
+6. Set the **Size** field by selecting the **Standard_D4s_v5** virtual machine size.
+
+    ![VM size is set.](images/2022-11-20-21-20-19.png "VM size is set.")
+
+7. Set the **Authentication type** to **Password**, then enter a **Username** and **Password** for the VM administrator account.
+
+    > **Note**: Be sure to save the Username and Password for the VM, so it can be used later. A recommendation for an easy to remember Username is `demouser` and Password is `demo!pass123`.
+
+    ![Administrator account credentials set.](images/2022-11-20-21-21-51.png "Administrator account credentials set.")
+
+    > **Note**: Password authentication for the Linux VM is being used to simplify the lab. In a production environment, the best practice is to use SSH public key authentication.
+
+8. Select **Next** until you are navigated to the **Networking** tab fo the **Create a virtual machine** page.
+
+    ![Networking tab is selected.](images/2022-11-20-21-26-00.png "Networking tab is selected.")
+
+9. Provision the VM in the Spoke VNet in Azure by selecting the following values under the **Network interface** section:
+
+    - **Virtual network**: Select the Spoke VNet that was created for this lab. Its name will be similar to `terrafirm-spoke-vnet`
+    - **Subnet**: `default (10.2.0.0/24)`
+
+    ![Network interface fields set.](images/2022-11-20-21-28-50.png "Network interface fields set.")
+
+10. For the **Public IP**, ensure that a **new** Public IP is selected so a Public IP is provisioned to enable Internet access to the VM. This will be used to access the Web Application over HTTP.
+
+    ![Public IP selected](images/2022-11-20-21-30-21.png "Public IP selected")
+
+11. For the **Select inbound ports**, select the **HTTP (80)** and **SSH (2)** ports to allow both HTTP and SSH traffic through the Network Security Group firewall to reach the VM.
+
+    ![Inbound ports are set](images/2022-11-20-21-32-39.png "Inbound ports are set")
+
+12. Select **Review + create** to review the virtual machine settings.
+
+    ![Review + create button](images/2022-11-20-21-36-24.png "Review + create button")
+
+13. Select **Create** to begin provisioning the virtual machine once the **Validation passed** message is shown.
+
+    ![Validation passed and create button](images/2022-11-20-21-38-48.png "Validation passed and create button")
+
+### Task 2: Install web application
+
+In this task, you will connect to the VM over SSH to install and configure the web application.
+
+1. In the Azure Portal, navigate to the newly created **Virtual Machine**.
+
+    ![Virtual machine pane is open](images/2022-11-20-21-42-39.png.png "Virtual machine pane is open")
+
+2. On the **Overview** pane of the **Virtual machine** blade, locate and copy the **Public IP Address** for the VM. This will be used to connect to the VM using SSH.
+
+    ![VM Public IP Address](images/2022-11-21-16-45-28.png "VM Public IP Address")
+
+3. At the top of the Azure Portal, select the **Cloud Shell** icon to open up the Azure Cloud Shell.
+
+    ![Cloud Shell icon](images/2022-11-21-16-46-35.png "Cloud Shell icon")
+
+4. Within the **Cloud Shell**, enter the following `ssh` command to connect to the VM using SSH. Be sure to replace the `<ip-address>` placeholder with the **Public IP Address** that was just copied for the VM.
+
+    ```bash
+    ssh demouser@<ip-address>
+    ```
+
+5. When prompted, enter `y` and press Enter to access the certificate warning for this VM. Then continue by entering the **Password** for the VM.
+
+    ![Cloud Shell with SSH certificate and password prompt](images/2022-11-21-16-49-59.png "Cloud Shell with SSH certificate and password prompt")
+
+    > **Note**: If you followed the previous suggestions for the VM username and password, then the password for the VM will be `demo!pass123`. Otherwise, enter the password you chose when provisioning the VM.
+
+6. Once connected to the VM via SSH, execute the following commands that will download an install script and run it that will install the web application on the VM:
+
+    ```bash
+    wget https://raw.githubusercontent.com/solliancenet/MCW-Migrate-Linux-OSS-DB-to-Azure/lab/Hands-on%20lab/resources/deployment/install-phpipam.sh
+    chmod +x install-phpipam.sh
+    sudo ./install-phpipam.sh
+    ```
+
+7. Execute the following command to open the `config.php` file for the web application in a text editor. The application needs to be configured to connect to the **Azure Database for MySQL** database that was previously migrated.
+
+    ```bash
+    sudo nano /var/www/html/config.php
+    ```
+
+    ![config.php file open in editor](images/2022-11-22-00-06-57.png "config.php file open in editor")
+
+8. Within the `config.php` file, set the following values for the **database connection details** section to configure it for Azure Database for MySQL.
+
+    - **host**: Enter the **Server name** for the **Azure Database for MySQL** instance that was previously copied.
+    - **user**: Enter the Admin user name for the **Azure Database for MySQL** instance.
+    - **pass**: Enter the Admin password for the **Azure Database for MySQL** instance.
+
+    ![config.php file with database connection details](images/2022-11-22-00-09-35.png "config.php file with database connection details")
+
+    > **Note**: If you followed the suggestions on the lab, then the Azure Database for MySQL administrator credentials should be the following:
+    > - **User name**: `mysqladmin`
+    > - **Password**: `demo!pass123`
+
+9. To save the file, press `^X` (ctrl-X) to exit the editor, press `Y` to save the modified buffer, then press **Enter** to write the changes to the file.
+
+10. In the Azure Portal, navigate to the **Azure Database for MySQL** instance, then select the **Networking** link under **Settings**. The firewall must be configured to allow the web application to connect to the database.
+
+    ![Azure Database for MySQL blade](images/2022-11-22-00-21-05.png "Azure Database for MySQL blade")
+
+11. On the **Networking** pane, add a new **Firewall rule** with the following values, then select **Save**.
+
+    - **Firewall rule name**: `webapp-vm`
+    - **Start IP address**: Enter the **Public IP Address** for the `terrafirm-webapp-vm` virtual machine.
+    - **End IP address**: Enter the **Public IP Address** for the `terrafirm-webapp-vm` virtual machine.
+
+    ![Networking pane](images/2022-11-22-00-23-09.png "Networking pane")
+
+
+7. Open a new browser tab, and navigate to the following URL to test that the web application is installed. Be sure to use `http://` since the web application is not currently configured for TLS/SSL.
+
+    ```
+    http://<ip-address>
+    ```
+
+8. The web application will look similar to the following screenshot.
+
+    ![web application in web browser](images/2022-11-21-16-54-27.png "web application in web browser")
+
+    > **Note**: The default username is `Admin` and password is `ipamadmin`. The first time you login to the web application, it will prompt to change the Admin password. A recommended password to change it to is `demo!pass123` so it's easily remembered for the lab.
 
 ## After the hands-on lab
 

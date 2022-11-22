@@ -44,3 +44,6 @@ sudo chcon -t httpd_sys_rw_content_t css/images/logo/ -R
 
 cp config.dist.php config.php
 echo "\$allow_untested_php_versions=true;" >> /var/www/html/config.php
+
+sudo sed -i "s/^\(\$db\['ssl'\]\s*=\s*\).*\$/\1true;/" config.php
+sudo sed -i "s/^\(\$db\['webhost'\]\s*=\s*\).*\$/\1'%';/" config.php
