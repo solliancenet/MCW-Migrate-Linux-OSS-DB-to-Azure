@@ -68,7 +68,7 @@ Directions: With all participants in the session, the facilitator/SME presents a
 
 Terra Firm Laboratories is a global bioengineering company that’s the leading researcher and innovator in genetic and biological science technology. The company was founded in 1975 with its corporate headquarters in Palo Alto, CA. Their mission-critical workloads are currently hosted in an on-premises datacenter and are beginning a journey to modernize and migrate into the cloud using Microsoft Azure.
 
-The CTO, Dennis Nedry, has kicked off an initiative for the organization to begin adopting the Microsoft Azure cloud, and modernize its infrastructure. He has already had his team begin assessing their current environment and what it will take to migrate to the cloud. They are looking to optimize their technology investments by reducing technical debt and streamlining operations using Azure Infrastructure as a Service (IaaS) and Platform as a Service (PaaS) cloud services.
+The CTO, Dennis Nedry, has kicked off an initiative for the organization to begin adopting the Microsoft Azure cloud and modernize its infrastructure. He has already had his team begin assessing their current environment and what it will take to migrate to the cloud. They are looking to optimize their technology investments by reducing technical debt and streamlining operations using Azure Infrastructure as a Service (IaaS) and Platform as a Service (PaaS) cloud services.
 
 Terra Firm Laboratories has already completed the first round of analysis to identify the applications and workloads to begin migrating first. Out of the total of over 250 workloads they currently have running on-premises, they have identified one workload that exemplifies multiple components that are common across many of their other workloads. The workload is also not their most complicated, so it should prove well to prove out the migration plan as it’s developed. This workload includes Red Hat Enterprise Linux (RHEL) servers hosting a Web application that uses a MySQL backend database.
 
@@ -94,13 +94,13 @@ This initial workload utilizes components that represent those used by most of t
 
 2. Security is extremely important when integrating the on-premises network and workloads with Microsoft Azure.
 
-3. Improve the business continuity and disaster recover position of the workloads that are migrated to Azure.
+3. Improve the business continuity and disaster recovery position of the workloads that are migrated to Azure.
 
 ### Customer objections
 
 1. What are the options to roll back to the on-premises VMs if the migration fails?
 
-2. What options does Azure provide for utilizing existing Red Hat Subscription to save on Red Hat enterprise Linux (RHEL) VM cost in the cloud?
+2. What options does Azure provide for utilizing existing Red Hat Subscription to save on Red Hat Enterprise Linux (RHEL) VM cost in the cloud?
 
 3. Securing and monitoring our on-premises workloads is extremely important. What options does Azure offer to extend this into the cloud?
 
