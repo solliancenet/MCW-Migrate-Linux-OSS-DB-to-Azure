@@ -56,7 +56,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 # Trainer information
 
-Thank you for taking time to support the whiteboard design sessions as a trainer!
+Thank you for taking the time to support the whiteboard design sessions as a trainer!
 
 ## Role of the trainer
 
@@ -92,7 +92,7 @@ Each whiteboard design session uses the following flow:
 
 Analyze your customer's needs.
 
-- Customer's background, situation, needs and technical requirements
+- Customer's background, situation, needs, and technical requirements
 
 - Current customer infrastructure and architecture
 
@@ -104,7 +104,7 @@ Design a solution and prepare to present the solution to the target customer aud
 
 - Determine your target customer audience.
 
-- Determine customer's business needs to address your solution.
+- Determine the customer's business needs to address your solution.
 
 - Design and diagram your solution.
 
@@ -192,7 +192,7 @@ Directions: With all participants in the session, the facilitator/SME presents a
 
 Terra Firm Laboratories is a global bioengineering company that’s the leading researcher and innovator in genetic and biological science technology. The company was founded in 1975 with its corporate headquarters in Palo Alto, CA. Their mission-critical workloads are currently hosted in an on-premises datacenter and are beginning a journey to modernize and migrate into the cloud using Microsoft Azure.
 
-The CTO, Dennis Nedry, has kicked off an initiative for the organization to begin adopting the Microsoft Azure cloud, and modernize its infrastructure. He has already had his team begin assessing their current environment and what it will take to migrate to the cloud. They are looking to optimize their technology investments by reducing technical debt and streamlining operations using Azure Infrastructure as a Service (IaaS) and Platform as a Service (PaaS) cloud services.
+The CTO, Dennis Nedry, has kicked off an initiative for the organization to begin adopting the Microsoft Azure cloud and modernize its infrastructure. He has already had his team begin assessing their current environment and what it will take to migrate to the cloud. They are looking to optimize their technology investments by reducing technical debt and streamlining operations using Azure Infrastructure as a Service (IaaS) and Platform as a Service (PaaS) cloud services.
 
 Terra Firm Laboratories has already completed the first round of analysis to identify the applications and workloads to begin migrating first. Out of the total of over 250 workloads they currently have running on-premises, they have identified one workload that exemplifies multiple components that are common across many of their other workloads. The workload is also not their most complicated, so it should prove well to prove out the migration plan as it’s developed. This workload includes Red Hat Enterprise Linux (RHEL) servers hosting a Web application that uses a MySQL backend database.
 
@@ -218,13 +218,13 @@ This initial workload utilizes components that represent those used by most of t
 
 2. Security is extremely important when integrating the on-premises network and workloads with Microsoft Azure.
 
-3. Improve the business continuity and disaster recover position of the workloads that are migrated to Azure.
+3. Improve the business continuity and disaster recovery position of the workloads that are migrated to Azure.
 
 ### Customer objections
 
 1. What are the options to roll back to the on-premises VMs if the migration fails?
 
-2. What options does Azure provide for utilizing existing Red Hat Subscription to save on Red Hat enterprise Linux (RHEL) VM cost in the cloud?
+2. What options does Azure provide for utilizing existing Red Hat Subscription to save on Red Hat Enterprise Linux (RHEL) VM cost in the cloud?
 
 3. Securing and monitoring our on-premises workloads is extremely important. What options does Azure offer to extend this into the cloud?
 
@@ -353,11 +353,11 @@ Directions: Reconvene with the larger group to hear the facilitator/SME share th
 
 - Provide feedback on their responses to the business needs and design.
 
-  - Try asking questions first that will lead the participants to discover the answers on their own.
+  - Try asking questions first which will lead the participants to discover the answers on their own.
 
 - Provide feedback for their responses to the customer's objections.
 
-  - Try asking questions first that will lead the participants to discover the answers on their own.
+  - Try asking questions first which will lead the participants to discover the answers on their own.
 
 ## Step 3: Present the solution
 
@@ -386,7 +386,7 @@ Directions: Reconvene with the larger group to hear the facilitator/SME share th
 
 ## Preferred solution
 
-Design an migration solution that addresses the needs and requirements of the organization. Provide details of your implementation. Make sure to document your design with a diagram along with addressing the questions.
+Design a migration solution that addresses the needs and requirements of the organization. Provide details of your implementation. Make sure to document your design with a diagram along with addressing the questions.
 
 *High-level architecture*
 
@@ -395,10 +395,10 @@ Design an migration solution that addresses the needs and requirements of the or
 These are the components of the preferred solution diagram:
 
 - Terra Firm Laboratories has a Hub and Spoke networking setup with Azure ExpressRoute connected to Azure
-- The PHP web applications has been migrated to Azure and is running in Azure Virtual Machines hosted within a Spoke VNet in Azure that is peered with the Hub VNet.
+- The PHP web applications have been migrated to Azure and are running in Azure Virtual Machines hosted within a Spoke VNet in Azure that is peered with the Hub VNet.
 - The MySQL database has been migrated to Azure Database for MySQL, and is integrated with the Spoke VNet in Azure that is peered with the Hub VNet and is accessible from the web application.
 - Each application in Azure is contained within its own Subnet with Network Security Groups securing them accordingly.
-- Other components that may be setup up according to the clients security requirements are:
+- Other components that may be setup up according to the client's security requirements are:
     - Azure Bastion for secure SSH access to Azure VMs
     - Azure Firewall to protect the front end web applications (a common component to use in a secure Azure networking model)
     - Azure Monitor setup to implement monitoring of Azure VMs
@@ -406,21 +406,21 @@ These are the components of the preferred solution diagram:
 These are some reasons for the chosen options in the preferred solution:
 
 - New Azure VMs for the migrated web application workloads are used since they also need to be upgraded to the latest version of Red Hat Enterprise Linux (RHEL).
-- The MySQL databases are migrated to Azure Database for MySQL so moving the existing MySQL database servers does not apply to this scenario. Also, Azure Database for MySQL provides a scalable, fully managed MySQL databases.
+- The MySQL databases are migrated to Azure Database for MySQL so moving the existing MySQL database servers does not apply to this scenario. Also, Azure Database for MySQL provides scalable, fully managed MySQL databases.
 
-*Migration**
+*Migration*
 
 1. How will you migrate the on-premises PHP workloads to Azure?
 
-    Since it is recommended to upgrade the latest version of Red Hat Enterprise Linux, it will be necessary to create new servers. In this case, Azure Migrate can not be used to move the on-premises VMs into Azure as-is. New Azure VMs need to be created with the application workloads deployed to these new Azure VMs.
+    Since it is recommended to upgrade to the latest version of Red Hat Enterprise Linux, it will be necessary to create new servers. In this case, Azure Migrate can not be used to move the on-premises VMs into Azure as-is. New Azure VMs need to be created with the application workloads deployed to these new Azure VMs.
 
-    Application deployment automation is already being done using DevOps practices within Terra Firm Laboratories, so there should be minimal effort necessary to extend those pipelines to deploy to the new Azure VMs in parallel. This parallel deployment will enable the on-premises and Azure VMs to be deployed to simultaneously with the latest source code deployed to both sets of hosting infrastructure. This will simplify the cutover process of redirecting web application traffic to the new Azure VMs. It will also enable a simplified process to rollback in the event of a migration failure.
+    Application deployment automation is already being done using DevOps practices within Terra Firm Laboratories, so there should be minimal effort necessary to extend those pipelines to deploy to the new Azure VMs in parallel. This parallel deployment will enable the on-premises and Azure VMs to be deployed simultaneously with the latest source code deployed to both sets of hosting infrastructure. This will simplify the cutover process of redirecting web application traffic to the new Azure VMs. It will also enable a simplified process to roll back in the event of a migration failure.
 
 2. How will you migrate the on-premise MySQL database workloads to Azure?
 
     The MySQL databases will be migrated to Azure Database for MySQL. The Azure Database for MySQL service will utilize VNet integration to securely connect to the Spoke VNET in the Hub and Spoke network topology.
 
-    The MySQL databases will be migrated using the Azure Database Migration Service to perform a one-time full database migration from the on-premises MySQL databases to Azure Database for MySQL. During the migration process the on-premises MySQL databases will remain until the cutover to Azure Database for MySQL is verified.
+    The MySQL databases will be migrated using the Azure Database Migration Service to perform a one-time full database migration from the on-premises MySQL databases to Azure Database for MySQL. During the migration process, the on-premises MySQL databases will remain until the cutover to Azure Database for MySQL is verified.
 
 *Pricing*
 
@@ -446,7 +446,7 @@ These are some reasons for the chosen options in the preferred solution:
     |----------|:-------------:|:-------------:|:-------------:|
     | Linux Virtual Machines | West US | 2x D4 v5 VMs (4 vCores, 16 GiB RAM) & Red Hat Enterprise Linux | $62.1376 each |
 
-    > **Note:** The D4 v5 VM pricing estimate is for Azure Hybrid Benefit (AHB) pricing with 3 year reserved instance. For Pay as you go with AHB the estimated cost would be $163.52 per month for each VM. Reserved instances offers a much lower cost.
+    > **Note:** The D4 v5 VM pricing estimate is for Azure Hybrid Benefit (AHB) pricing with 3 year reserved instance. For Pay as you go with AHB the estimated cost would be $163.52 per month for each VM. Reserved instances offer a much lower cost.
 
     _MySQL databases_
 
@@ -464,7 +464,7 @@ These are some reasons for the chosen options in the preferred solution:
 
     **Solution**
 
-    Pricing Azure solutions is complex task. The example solution below includes many assumptions, for example on Azure App Service pricing tier. These need to be validated with Terra Firm.
+    Pricing Azure solutions is a complex task. The example solution below includes many assumptions, for example on Azure App Service pricing tier. These need to be validated with Terra Firm.
 
     Since Terra Firm and their current on-premises datacenter is in Palo Alto, CA, the nearest Azure Region to use will be West US. Their secondary Azure region for DR will be East US, as that's the Azure region pair for West US.
 
@@ -474,13 +474,13 @@ These are some reasons for the chosen options in the preferred solution:
 
     For hosting the PHP web application in Azure using a PaaS service, then Azure App Service is the most appropriate service. App Service offers a fully managed service with built-in infrastructure maintenance, security patching, and scaling. This reduces the cost of maintenance allowing IT Admins more time to work on other tasks instead of maintaining VMs.
 
-    App Service also support VNet integration enabling integration with the Hub and Spoke networking topology to meet the security requirements of Terra Firm.
+    App Service also supports VNet integration enabling integration with the Hub and Spoke networking topology to meet the security requirements of Terra Firm.
 
     | **Component** | **Region** | **Details / Assumptions** | **Est. Monthly Cost (USD)** |
     |----------|:-------------:|:-------------:|:-------------:|
     | Azure App Service Plan | West US | P2v3 (4 vCores, 16 GB RAM) | $295 |
 
-    > **Note:** The P2v3 pricing estimate is for 3 year reserved instance. For Pay as you go the estimated cost would be $489 per month. Reserved instance offers much lower cost.
+    > **Note:** The P2v3 pricing estimate is for 3 year reserved instance. For Pay as you go the estimated cost would be $489 per month. Reserved instance offers a much lower cost.
 
     A comparison of the estimated cost of a single VM to Azure App Service as estimated in the preferred solution shows that PaaS hosting using Azure App Service costs more. However, it's important to remember that with Azure App Service being a fully managed service, the overall maintenance costs for IT Admins will be lower. Further consultation will need to be performed with Terra Firm to determine how much administration time will be saved by hosting on Azure App Service instead of VMs.
 
@@ -512,12 +512,12 @@ These are some reasons for the chosen options in the preferred solution:
 
     Further evaluation of the applications will be necessary to determine the requirements for hosting these applications using Azure App Service. App Service Web Apps provide a PaaS hosting option for applications that further reduce the management burden over IaaS VMs. It supports applications built with PHP among other development languages, as well as running on a Linux host for the Web App.
 
-    Azure Kubernetes Service (AKS) is another potential option for hosting applications. For Terra Firm, this may not be the best option as it would likely require redesign of the applications to host in AKS. If Azure App Service doesn't meet their requirements, then AKS may offer an alternative that fits better.
+    Azure Kubernetes Service (AKS) is another potential option for hosting applications. For Terra Firm, this may not be the best option as it would likely require a redesign of the applications to host in AKS. If Azure App Service doesn't meet their requirements, then AKS may offer an alternative that fits better.
 
-    If they are willing to redesign their applications, then serverless hosting with Azure Functions could be a consideration. The applications would not be able to be hosted in Azure Functions as they are currently written. This would be applicable to any backend REST APIs they have and not as much to the front end web applications. The primary benefits of Azure Functions is that is can reduce the amount of source code the development team must write and maintain. Also, given the security requirements of Terra Firm, they would need to use dedicated hosting so it would cost similar to using App Service for hosting the original application.
+    If they are willing to redesign their applications, then serverless hosting with Azure Functions could be a consideration. The applications would not be able to be hosted in Azure Functions as they are currently written. This would be applicable to any backend REST APIs they have and not as much to the front end web applications. The primary benefit of Azure Functions is that it can reduce the amount of source code the development team must write and maintain. Also, given the security requirements of Terra Firm, they would need to use dedicated hosting so it would cost similar to using App Service for hosting the original application.
 
 ## Customer quote (to be read back to the attendees at the end)
 
-"We recognized the need and benefits of migrating our aging infrastructure to Azure. I know this migration is going to help us increase reliability while lowering operation and maintenance costs. I'm really looking forward modernizing with cloud infrastructure that will allow us to do more with less."
+"We recognized the need and benefits of migrating our aging infrastructure to Azure. I know this migration is going to help us increase reliability while lowering operation and maintenance costs. I'm really looking forward to modernizing with cloud infrastructure that will allow us to do more with less."
 
 -Dennis Nedry, CTO, Terra Firm Laboratories
