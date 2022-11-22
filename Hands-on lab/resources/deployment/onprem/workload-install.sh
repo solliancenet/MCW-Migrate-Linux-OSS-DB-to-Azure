@@ -30,11 +30,15 @@ sudo firewall-cmd --permanent --add-port=443/tcp
 sudo firewall-cmd --permanent --add-port=3306/tcp
 sudo firewall-cmd --reload
 
-# Start MariaDB
-sudo systemctl start mariadb
-sudo systemctl enable mariadb
 
-# Configure MariaDB / MySQL
+# Install MySQL
+sudo dnf install mysql-server
+
+# Start MariaDB
+sudo systemctl start mysqld.service
+sudo systemctl enable mysqld.service
+
+# Configure MySQL
 # sudo yum install expect -y
 # SECURE_MYSQL=$(expect -c "
 # set timeout 10
