@@ -36,7 +36,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
         - [Task 1: Create Red Hat Enterprise Linux VM for application hosting](#task-1-create-red-hat-enterprise-linux-vm-for-application-hosting)
         - [Task 2: Install web application](#task-2-install-web-application)
     - [Exercise 2: MySQL database migration](#exercise-2-exercise-name)
-        - [Task 1: Create Database for MySQL resource](#task-1-create-database-for-mysql-resource)
+        - [Task 1: Create Azure Database for MySQL](#task-1-create-azure-database-for-mysql)
         - [Task 2: Create Azure Database Migration Service](#task-2-create-azure-database-migration-service)
         - [Task 3: Migration MySQL database to Azure](#task-3-migration-mysql-database-to-azure)
     - [After the hands-on lab](#after-the-hands-on-lab)
@@ -203,7 +203,7 @@ Duration: 60 minutes
 
 In this exercise, you will migrate the on-premises MySQL database for the web application workload to Azure. The Azure Database Migration Service will be used to perform the database migration from the MySQL server on-premises to the Azure Database for MySQL service.
 
-### Task 1: Create Database for MySQL resource
+### Task 1: Create Azure Database for MySQL
 
 1. Sign in to the [Azure Portal](https://portal.azure.com). Ensure that you're using a subscription associated with the same resources you created during the Before the hands-on lab setup.
 
@@ -251,6 +251,18 @@ In this exercise, you will migrate the on-premises MySQL database for the web ap
 11. Select **Create** to provision the service.
 
     ![Review + create screen with Create button](images/2022-11-20-22-46-07.png "Review + create screen with Create button")
+
+12. Once provisioning has completed navigate to the **Azure Database for MySQL** resource that was just created, then select **Databases** under **Settings** on the side of the pane.
+
+    ![Databases link](images/2022-11-21-21-26-19.png "Databases link")
+
+13. Select **+ Add** to create a new database.
+
+    ![Add database button](images/2022-11-21-21-27-38.png "Add database button")
+
+14. On the **Create Database** pane, enter `phpipam` in the **Name** field, then select **Save**. This will create a new MySQL database that will be the target for the database migration.
+
+    ![Create database pane with values entered](images/2022-11-21-21-28-24.png "Create database pane with values entered")
 
 ### Task 2: Create Azure Database Migration Service
 
@@ -301,8 +313,33 @@ In this exercise, you will migrate the on-premises MySQL database for the web ap
 
 ### Task 3: Migration MySQL database to Azure
 
-1. 
+1. In the Azure Portal, navigate to the newly created **Azure Database Migration Service**, and select the **+ New Migration Project** button.
 
+    ![Azure Database Migration Service blade with New Migration Project button highlighted](images/2022-11-21-21-32-14.png "Azure Database Migration Service blade with New Migration Project button highlighted")
+
+2. On the **New migration project** blade, select the following values:
+
+    - **Project name**: `phpipam`
+    - **Source server type**: `MySQL`
+    - **Target server type**: `Azure Database for MySQL (Single or Flexible)`
+    - **Migration activity type**: `Offline data migration`
+
+    ![](images/2022-11-21-21-33-36.png "")
+
+3. Select **Create and run activity**.
+
+    ![Create and run activity button](images/2022-11-21-21-35-47.png "Create and run activity button")
+
+4. On the **MySQL to Azure Database for MySQL Offline Data Migration Wizard** blade, enter the following values on the **Select source** tab, then select **Next: Select target >>**.
+
+    - **Source server name**: Enter the **Public IP Address** of the on-premises workload server named similar to `terrafirm-onprem-workload-vm`.
+    - **Server port**: `3306`
+    - **User name**: `root`
+    - **Password**: `demopass123`
+
+    ![Offline Data Migration Wizard select source tab with values entered](images/2022-11-21-21-41-26.png "Offline Data Migration Wizard select source tab with values entered")
+
+[TODO]
 
 ## After the hands-on lab
 

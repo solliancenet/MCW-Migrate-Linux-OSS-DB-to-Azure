@@ -34,12 +34,32 @@ sudo firewall-cmd --reload
 sudo systemctl start mariadb
 sudo systemctl enable mariadb
 
-
-
+# Configure MariaDB / MySQL
+# sudo yum install expect -y
+# SECURE_MYSQL=$(expect -c "
+# set timeout 10
+# spawn mysql_secure_installation
+# expect \"Enter current password for root (enter for none):\"
+# send \"\r\"
+# expect \"Switch to unix_socket authentication\"
+# send \"n\r\"
+# expect \"Change the root password?\"
+# send \"n\r\"
+# expect \"Remove anonymous users?\"
+# send \"y\r\"
+# expect \"Disallow root login remotely?\"
+# send \"n\r\"
+# expect \"Remove test database and access to it?\"
+# send \"y\r\"
+# expect \"Reload privilege tables now?\"
+# send \"y\r\"
+# expect eof
+# ")
 
 sudo mysql -uroot -e "CREATE DATABASE phpipam;"
 sudo mysql -uroot -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('demopass123');"
-sudo mysql -uroot -e "GRANT ALL PRIVILEGES ON mysql.* TO 'root'@'%' IDENTIFIED BY 'demopass123';"
+sudo mysql -uroot -e "GRANT ALL PRIVILEGES ON *.* to 'root'@'%' IDENTIFIED BY 'demopass123' with grant option;"
+# sudo mysql -uroot -e "GRANT ALL PRIVILEGES ON mysql.* TO 'root'@'%' IDENTIFIED BY 'demopass123';"
 sudo mysql -uroot -e "GRANT ALL PRIVILEGES ON phpipam.* TO 'root'@'%' IDENTIFIED BY 'demopass123'; FLUSH PRIVILEGES;"
 
 # Install phpipam

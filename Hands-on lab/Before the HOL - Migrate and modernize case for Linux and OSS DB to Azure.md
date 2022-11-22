@@ -30,6 +30,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Requirements](#requirements)
     - [Before the hands-on lab](#before-the-hands-on-lab)
         - [Task 1: Create existing resources](#task-1-create-existing-resources)
+        - [Task 2: Configure On-Premises Web Application](#task-2-configure-on-premises-web-application)
 
 <!-- /TOC -->
 
@@ -65,8 +66,17 @@ In this task, you will leverage a custom Azure Resource Manager (ARM) template t
 
     The deployment is now underway. On average, this process can take 30 minutes to complete. It is important that you monitor the deployment progress to ensure there are no problems. You can monitor progress by selecting the notification bell in the upper right corner and selecting **Deployment in progress...**
 
->**Note**: While automation can make things simpler and repeatable, sometimes it can fail. If at any time during the ARM template deployment there is a failure, review the failure, delete the Resource Group, and try the ARM template again, adjusting for errors.
+    >**Note**: While automation can make things simpler and repeatable, sometimes it can fail. If at any time during the ARM template deployment there is a failure, review the failure, delete the Resource Group, and try the ARM template again, adjusting for errors.
 
-Once the ARM template is deployed, the status will change to complete. At this point, things are ready for you to go through the Hands-on lab.
+    Once the ARM template is deployed, the status will change to complete.
+
+### Task 2: Configure On-Premises Web Application
+
+In this task, you will configure the web application hosted on the simulated on-premises virtual machine that was provisioned by the ARM Template deployment.
+
+1. ?
+
+
+At this point, things are ready for you to go through the Hands-on lab.
 
 You should follow all steps provided *before* performing the Hands-on lab.
