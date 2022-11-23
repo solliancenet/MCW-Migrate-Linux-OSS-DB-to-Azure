@@ -95,7 +95,7 @@ In this exercise, you will migrate the on-premises MySQL database for the web ap
 
     ![Create a resource on Azure Portal Home page.](images/2022-11-20-21-08-40.png "Create a resource on Azure Portal Home page.")
 
-3. Within the **Search services and marketplace** field, type **MySQL**, press Enter, then select **Azure Database for MySQL** in the search results.
+3. Within the **Search services and marketplace** field, type `mysql`, press Enter, then select **Azure Database for MySQL** in the search results.
 
     ![Azure Database for MySQL in the marketplace](images/2022-11-20-22-24-33.png "Azure Database for MySQL in the marketplace")
 
@@ -158,7 +158,7 @@ In this exercise, you will migrate the on-premises MySQL database for the web ap
 
     ![Create a resource on Azure Portal Home page.](images/2022-11-20-21-08-40.png "Create a resource on Azure Portal Home page.")
 
-2. Within the **Search services and marketplace** field, type **Azure Database Migration**, press Enter, then select it in the search results.
+2. Within the **Search services and marketplace** field, type `azure database migration service`, press Enter, then select **Azure Database Migration Service** in the search results.
 
     ![Azure Database Migration Service](images/2022-11-20-23-04-06.png "Azure Database Migration Service")
 
@@ -400,14 +400,13 @@ In this task, you will connect to the VM over SSH to install and configure the w
 
     ![Networking pane](images/2022-11-22-00-23-09.png "Networking pane")
 
+12. Open a new browser tab, and navigate to the following URL to test that the web application is installed. Be sure to use `http://` since the web application is not currently configured for TLS/SSL.
 
-7. Open a new browser tab, and navigate to the following URL to test that the web application is installed. Be sure to use `http://` since the web application is not currently configured for TLS/SSL.
-
-    ```
+    ```text
     http://<ip-address>
     ```
 
-8. The web application will look similar to the following screenshot.
+13. The web application will look similar to the following screenshot.
 
     ![web application in web browser](images/2022-11-21-16-54-27.png "web application in web browser")
 

@@ -62,6 +62,8 @@ In this task, you will leverage a custom Azure Resource Manager (ARM) template t
     - Specify a **Resource Name Base** (specify a base value that includes your initials to keep unique to prevent naming conflicts, for example, `terrafirmcp`).
     - Select **Review + create**
 
+    ![Custom deployment with details set](images/2022-11-22-20-29-41.png "Custom deployment with details set")
+
 5. Agree to the Terms and conditions and select **Create**.
 
     The deployment is now underway. On average, this process can take 30 minutes to complete. It is important that you monitor the deployment progress to ensure there are no problems. You can monitor progress by selecting the notification bell in the upper right corner and selecting **Deployment in progress...**
