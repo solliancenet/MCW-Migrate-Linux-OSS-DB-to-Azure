@@ -99,7 +99,7 @@ In this task, you will configure the web application hosted on the simulated on-
 
     ![Login page](images/2022-11-21-22-54-53.png "Login page")
 
-    > **Note**: The first time you login to the web application, it will prompt to change the Admin password. A recommended password to change it to is `demo!pass123` so it's easily remembered for the lab.
+    > **Note**: The first time you login to the web application, it will prompt you to change the Admin password. A recommended password to change it to is `demo!pass123` so it's easily remembered for the lab.
 
 At this point, things are ready for you to go through the Hands-on lab.
 
