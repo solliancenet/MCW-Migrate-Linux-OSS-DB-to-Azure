@@ -48,15 +48,15 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 ## Abstract and learning objectives
 
-In this hands-on lab, you will perform steps to migrate Red Hat Enterprise Linux (RHEL) and MySQL database workloads to Azure. You will go through provisioning a Red Hat Enterprise Linux VM, and migrate MySQL database to Azure Database for MySQL.
+In this hands-on lab, you will perform steps to migrate Red Hat Enterprise Linux (RHEL) and MySQL database workloads to Azure. You will go through provisioning a Red Hat Enterprise Linux VM and migrate MySQL database to Azure Database for MySQL.
 
 ## Overview
 
-In this hands-on lab, you will perform steps to migrate Red Hat Enterprise Linux (RHEL) and MySQL database workloads to Azure. You will go through provisioning a Red Hat Enterprise Linux VM, and migrate MySQL database to Azure Database for MySQL.
+In this hands-on lab, you will perform steps to migrate Red Hat Enterprise Linux (RHEL) and MySQL database workloads to Azure. You will go through provisioning a Red Hat Enterprise Linux VM and migrate MySQL database to Azure Database for MySQL.
 
 Terra Firm already has a Hub and Spoke network set up in Azure with Azure Bastion for enabling remote management of Azure VM using Azure Bastion. The Azure resources provisioned throughout this lab will be deployed to this environment.
 
-At the end of this hands-on lab, you will be better able to set up a Red Hat Enterprise Linux (RHEL) VM for application migration to Azure, and migrate an on-premises MySQL database to Azure Database for MySQL.
+At the end of this hands-on lab, you will be better able to set up a Red Hat Enterprise Linux (RHEL) VM for application migration to Azure and migrate an on-premises MySQL database to Azure Database for MySQL.
 
 ## Solution architecture
 
@@ -66,7 +66,7 @@ These are the components of the preferred solution diagram:
 
 - Terra Firm Laboratories has a Hub and Spoke networking setup with Azure ExpressRoute connected to Azure
 - The PHP web applications have been migrated to Azure and are running in Azure Virtual Machines hosted within a Spoke VNet in Azure that is peered with the Hub VNet.
-- The MySQL database has been migrated to Azure Database for MySQL, and is integrated with the Spoke VNet in Azure that is peered with the Hub VNet and is accessible from the web application.
+- The MySQL database has been migrated to Azure Database for MySQL and is integrated with the Spoke VNet in Azure that is peered with the Hub VNet and is accessible from the web application.
 - Each application in Azure is contained within its own Subnet with Network Security Groups securing them accordingly.
 - Other components that may be setup up according to the client's security requirements are:
     - Azure Bastion for secure SSH access to Azure VMs
@@ -201,7 +201,7 @@ In this exercise, you will migrate the on-premises MySQL database for the web ap
 
 ### Task 3: Migration MySQL database to Azure
 
-1. In the Azure Portal, navigate to the newly created **Azure Database Migration Service**, and select the **+ New Migration Project** button.
+1. In the Azure Portal, navigate to the newly created **Azure Database Migration Service** and select the **+ New Migration Project** button.
 
     ![Azure Database Migration Service blade with New Migration Project button highlighted](images/2022-11-21-21-32-14.png "Azure Database Migration Service blade with New Migration Project button highlighted")
 
@@ -256,11 +256,11 @@ In this exercise, you will migrate the on-premises MySQL database for the web ap
 
     ![Migration pending](images/2022-11-21-23-46-20.png "Migration pending")
 
-10. After a minute, select **Refresh** to check if the migration has completed. Once complete, the **Status** will show as **Completed** and the **Migration details** will display the total number of tables that have been migrated.
+10. After a minute, select **Refresh** to check if the migration has been completed. Once complete, the **Status** will show as **Completed** and the **Migration details** will display the total number of tables that have been migrated.
 
     ![Migration completed](images/2022-11-21-23-49-09.png "Migration completed")
 
-## Exercise 2: Create VM to migrate web application
+## Exercise 2: Create VM to migrate a web application
 
 Duration: 60 minutes
 
@@ -382,7 +382,7 @@ In this task, you will connect to the VM over SSH to install and configure the w
 
     ![config.php file with database connection details](images/2022-11-22-00-09-35.png "config.php file with database connection details")
 
-    > **Note**: If you followed the suggestions on the lab, then the Azure Database for MySQL administrator credentials should be the following:
+    > **Note**: If you followed the suggestions in the lab, then the Azure Database for MySQL administrator credentials should be the following:
     > - **User name**: `mysqladmin`
     > - **Password**: `demo!pass123`
 
@@ -410,13 +410,13 @@ In this task, you will connect to the VM over SSH to install and configure the w
 
     ![web application in web browser](images/2022-11-21-16-54-27.png "web application in web browser")
 
-    > **Note**: The default username is `Admin` and password is `ipamadmin`. The first time you login to the web application, it will prompt to change the Admin password. A recommended password to change it to is `demo!pass123` so it's easily remembered for the lab.
+    > **Note**: The default username is `Admin` and password is `ipamadmin`. The first time you login to the web application, it will prompt you to change the Admin password. A recommended password to change it to is `demo!pass123` so it's easily remembered for the lab.
 
 ## After the hands-on lab
 
 Duration: 15 minutes
 
-### Task 1: Delete resource group to remove the lab environment
+### Task 1: Delete the resource group to remove the lab environment
 
 1. Go to the **Azure Portal**.
 
