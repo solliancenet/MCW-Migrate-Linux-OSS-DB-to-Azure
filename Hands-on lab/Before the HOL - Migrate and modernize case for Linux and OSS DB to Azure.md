@@ -48,7 +48,7 @@ Duration: 30 minutes
 
 In this task, you will leverage a custom Azure Resource Manager (ARM) template to deploy the existing Azure resources and a simulated on-premises environment for Terra Firm.
 
-1. Open a browser using "InPrivate" or "Incognito" mode, and navigate to the ARM template: [ARM Template on GitHub](https://github.com/solliancenet/MCW-Migrate-Linux-OSS-DB-to-Azure/tree/lab/Hands-on%20lab/resources/deployment).
+1. Open a browser using "InPrivate" or "Incognito" mode, and navigate to the ARM template: [ARM Template on GitHub](https://github.com/solliancenet/MCW-Migrate-Linux-OSS-DB-to-Azure/tree/main/Hands-on%20lab/resources/deployment).
 
 2. Select **Deploy to Azure**. This will open a new browser tab to the Azure Portal for custom deployments.
 

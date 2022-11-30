@@ -361,7 +361,7 @@ In this task, you will connect to the VM over SSH to install and configure the w
 6. Once connected to the VM via SSH, execute the following commands that will download an install script and run it that will install the web application on the VM:
 
     ```bash
-    wget https://raw.githubusercontent.com/solliancenet/MCW-Migrate-Linux-OSS-DB-to-Azure/lab/Hands-on%20lab/resources/deployment/install-phpipam.sh
+    wget https://raw.githubusercontent.com/solliancenet/MCW-Migrate-Linux-OSS-DB-to-Azure/main/Hands-on%20lab/resources/deployment/install-phpipam.sh
     chmod +x install-phpipam.sh
     sudo ./install-phpipam.sh
     ```

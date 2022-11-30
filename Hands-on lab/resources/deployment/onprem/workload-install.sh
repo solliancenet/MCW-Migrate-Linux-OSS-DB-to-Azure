@@ -18,7 +18,7 @@ sudo yum install php-gmp -y
 # Update /etc/httpd/conf/httpd.conf
 cd /etc/httpd/conf/
 rm -f httpd.conf
-wget https://raw.githubusercontent.com/solliancenet/MCW-Migrate-Linux-OSS-DB-to-Azure/lab/Hands-on%20lab/resources/deployment/onprem/httpd.conf
+wget https://raw.githubusercontent.com/solliancenet/MCW-Migrate-Linux-OSS-DB-to-Azure/main/Hands-on%20lab/resources/deployment/onprem/httpd.conf
 
 
 # Start Apache

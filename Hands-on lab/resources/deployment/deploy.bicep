@@ -11,7 +11,7 @@ var spokeNamePrefix = '${resourceNameBase}-spoke-'
 var onpremWorkloadVMNamePrefix = '${onpremNamePrefix}workload-'
 
 var GitHubScriptRepo = 'solliancenet/MCW-Migrate-Linux-OSS-DB-to-Azure'
-var GitHubScriptRepoBranch = 'lab'
+var GitHubScriptRepoBranch = 'main'
 var GitHubScriptRepoBranchURL = 'https://raw.githubusercontent.com/${GitHubScriptRepo}/${GitHubScriptRepoBranch}/Hands-on lab/resources/deployment/'
 
 var WorkloadInstallScriptFileName = 'workload-install.sh'

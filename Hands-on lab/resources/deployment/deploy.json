@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.10.61.36676",
-      "templateHash": "11286341804631824591"
+      "templateHash": "12511027934939053791"
     }
   },
   "parameters": {
@@ -24,7 +24,7 @@
     "spokeNamePrefix": "[format('{0}-spoke-', parameters('resourceNameBase'))]",
     "onpremWorkloadVMNamePrefix": "[format('{0}workload-', variables('onpremNamePrefix'))]",
     "GitHubScriptRepo": "solliancenet/MCW-Migrate-Linux-OSS-DB-to-Azure",
-    "GitHubScriptRepoBranch": "lab",
+    "GitHubScriptRepoBranch": "main",
     "GitHubScriptRepoBranchURL": "[format('https://raw.githubusercontent.com/{0}/{1}/Hands-on lab/resources/deployment/', variables('GitHubScriptRepo'), variables('GitHubScriptRepoBranch'))]",
     "WorkloadInstallScriptFileName": "workload-install.sh",
     "WorkloadInstallScriptURL": "[format('{0}onprem/{1}', variables('GitHubScriptRepoBranchURL'), variables('WorkloadInstallScriptFileName'))]",
