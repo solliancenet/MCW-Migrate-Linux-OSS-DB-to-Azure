@@ -390,7 +390,7 @@ Design a migration solution that addresses the needs and requirements of the org
 
 *High-level architecture*
 
-![](images/PreferredSolutionDiagram.jpg "Preferred solution diagram")
+![The image shows how the on-premises network on the left connects through Azure ExpressRoute to the Hub VNet with Azure Bastion and Azure Firewall. On the right is the Spoke VNet that is connected to the Hub VNet through VNet Peering and hosts the VM and MySQL workloads.](images/PreferredSolutionDiagram.jpg "Preferred solution diagram")
 
 These are the components of the preferred solution diagram:
 
