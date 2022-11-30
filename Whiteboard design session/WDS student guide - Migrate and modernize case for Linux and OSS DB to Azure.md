@@ -109,7 +109,7 @@ This initial workload utilizes components that represent those used by most of t
 ### Infographic for common scenarios
 
 **Hub-spoke network topology in Azure**
-![The image shows how on-premises network on the left connects through Azure ExpressRoute to the Hub VNet with Azure Bastion and Azure Firewall. On the right is multiple Spoke VNet that connect to the Hub VNet through VNet Peering and hosts multiple VM workloads.](images/diagram-azure-vnet-hub-spoke.png "Hub-spoke network topology in Azure")
+![The image shows how the on-premises network on the left connects through Azure ExpressRoute to the Hub VNet with Azure Bastion and Azure Firewall. On the right are multiple Spoke VNet that connect to the Hub VNet through VNet Peering and hosts multiple VM workloads.](images/diagram-azure-vnet-hub-spoke.png "Hub-spoke network topology in Azure")
 
 ## Step 2: Design a proof of concept solution
 
