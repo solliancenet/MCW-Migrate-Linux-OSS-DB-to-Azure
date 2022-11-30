@@ -109,7 +109,7 @@ sudo sed -i "s/^\(\$db\['webhost'\]\s*=\s*\).*\$/\1'%';/" config.php
 
 
 cd /var/www
-sudo wget https://raw.githubusercontent.com/solliancenet/MCW-Migrate-Linux-OSS-DB-to-Azure/lab/Hands-on%20lab/resources/deployment/onprem/phpipam-create.sql
+sudo wget https://raw.githubusercontent.com/solliancenet/MCW-Migrate-Linux-OSS-DB-to-Azure/main/Hands-on%20lab/resources/deployment/onprem/phpipam-create.sql
 sudo mysql -uroot -pdemopass123 -e "source /var/www/phpipam-create.sql"
 
 # default phpipam login
