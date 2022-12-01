@@ -52,7 +52,7 @@ In this task, you will leverage a custom Azure Resource Manager (ARM) template t
 
 2. Select **Deploy to Azure**. This will open a new browser tab to the Azure Portal for custom deployments.
 
-    ![GitHub page with Deploy to Azure button highlighted](images/before-hol-deploy-to-azure.png "Deploy to Azure")
+    ![The GitHub page with Deploy to Azure button highlighted.](images/before-hol-deploy-to-azure.png "The GitHub page with Deploy to Azure button highlighted.")
 
 3. If prompted, sign in with an account that is an owner of the Azure Subscription.
 
@@ -62,7 +62,7 @@ In this task, you will leverage a custom Azure Resource Manager (ARM) template t
     - Specify a **Resource Name Base** (specify a base value that includes your initials to keep unique to prevent naming conflicts, for example, `terrafirmcp`).
     - Select **Review + create**
 
-    ![Custom deployment with details set](images/2022-11-22-20-29-41.png "Custom deployment with details set")
+    ![Custom deployment with details for ARM Template set.](images/2022-11-22-20-29-41.png "Custom deployment with details for ARM Template set.")
 
 5. Agree to the Terms and conditions and select **Create**.
 
@@ -78,15 +78,15 @@ In this task, you will configure the web application hosted on the simulated on-
 
 1. In the **Azure Portal**, navigate to the **Resource Group** that you created for this lab, then select the **On-premises Workload VM** named similar to `terrafirm-onprem-workload-vm`.
 
-    ![Resource group with on-premises workload VM highlighted](images/2022-11-21-22-49-18.png "Resource group with on-premises workload VM highlighted")
+    ![The Resource group with on-premises workload VM highlighted.](images/2022-11-21-22-49-18.png "The Resource group with on-premises workload VM highlighted.")
 
 2. On the **Virtual Machine** blade, locate and copy the **Public IP Address** for the VM.
 
-    ![Virtual machine blade with Public IP Address highlighted](images/2022-11-21-22-51-34.png "Virtual machine blade with Public IP Address highlighted")
+    ![The Virtual machine blade with Public IP Address highlighted.](images/2022-11-21-22-51-34.png "The Virtual machine blade with Public IP Address highlighted.")
 
 3. Open a new browser window, then navigate to the following `http://` URL to access the simulated on-premises web application provisioned for this lab. Be sure to replace the `<ip-address>` placeholder with the **Public IP Address** for the VM.
 
-    ```
+    ```text
     http://<ip-address>
     ```
 
@@ -97,7 +97,7 @@ In this task, you will configure the web application hosted on the simulated on-
     - **Username**: `Admin`
     - **Password**: `ipamadmin`
 
-    ![Login page](images/2022-11-21-22-54-53.png "Login page")
+    ![The login page for the web application is displayed.](images/2022-11-21-22-54-53.png "The login page for the web application is displayed.")
 
     > **Note**: The first time you login to the web application, it will prompt you to change the Admin password. A recommended password to change it to is `demo!pass123` so it's easily remembered for the lab.
 
