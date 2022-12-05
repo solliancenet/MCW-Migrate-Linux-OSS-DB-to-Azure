@@ -122,7 +122,7 @@ In this exercise, you will migrate the on-premises MySQL database for the web ap
 
 8. Select **Next: Networking >**.
 
-    ![Next Networking button](images/2022-11-20-22-41-09.png "Next Networking button")
+    ![Image with Next Networking button highlighted.](images/2022-11-20-22-41-09.png "Next Networking button")
 
 9. On the **Networking** tab, under **Firewall rules**, select the checkbox for **Allow public access from any Azure service within Azure to this server**.
 
@@ -134,7 +134,7 @@ In this exercise, you will migrate the on-premises MySQL database for the web ap
 
 11. Select **Create** to provision the service.
 
-    ![The Review + create screen with Create button.](images/2022-11-20-22-46-07.png "The Review + create screen with Create button.")
+    ![The Review + create screen with Create button highlighted.](images/2022-11-20-22-46-07.png "The Review + create screen with Create button.")
 
 12. Once provisioning has completed navigate to the **Azure Database for MySQL** resource that was just created, copy and save the **Server name** for use later.
 
@@ -142,11 +142,11 @@ In this exercise, you will migrate the on-premises MySQL database for the web ap
 
 13. Select **Databases** under **Settings** on the side of the pane.
 
-    ![Databases link](images/2022-11-21-21-26-19.png "Databases link")
+    ![Databases link is hihghlighted.](images/2022-11-21-21-26-19.png "Databases link")
 
 14. Select **+ Add** to create a new database.
 
-    ![Add database button](images/2022-11-21-21-27-38.png "Add database button")
+    ![Add database button is highlighted.](images/2022-11-21-21-27-38.png "Add database button")
 
 15. On the **Create Database** pane, enter `phpipam` in the **Name** field, then select **Save**. This will create a new MySQL database that will be the target for the database migration.
 
@@ -185,19 +185,19 @@ In this exercise, you will migrate the on-premises MySQL database for the web ap
 
 7. Select **Next: Networking >>**.
 
-    ![Next Networking button](images/2022-11-20-23-17-04.png "Next Networking button")
+    ![Next Networking button highlighted.](images/2022-11-20-23-17-04.png "Next Networking button")
 
 8. On the **Networking** tab, select the **terrafirm-hub-vnet/hub** VNet and Subnet.
 
-    ![VNet selected](images/2022-11-20-23-19-09.png "VNet selected")
+    ![On Create Migration Service screen the VNet is selected.](images/2022-11-20-23-19-09.png "VNet selected")
 
 9. Select **Review + create**.
 
-    ![Review + create button](images/2022-11-20-23-18-39.png "Review + create button")
+    ![Review + create button highlighted.](images/2022-11-20-23-18-39.png "Review + create button")
 
 10. Select **Create** to provision the service.
 
-    ![Create button is highlighted](images/2022-11-20-23-21-18.png "Create button is highlighted")
+    ![Create button is highlighted.](images/2022-11-20-23-21-18.png "Create button is highlighted")
 
 ### Task 3: Migration MySQL database to Azure
 
@@ -212,11 +212,11 @@ In this exercise, you will migrate the on-premises MySQL database for the web ap
     - **Target server type**: `Azure Database for MySQL (Single or Flexible)`
     - **Migration activity type**: `Offline data migration`
 
-    ![New migration project](images/2022-11-21-21-33-36.png "New migration project")
+    ![New migration project with values entered.](images/2022-11-21-21-33-36.png "New migration project")
 
 3. Select **Create and run activity**.
 
-    ![Create and run activity button](images/2022-11-21-21-35-47.png "Create and run activity button")
+    ![Create and run activity button highlighted.](images/2022-11-21-21-35-47.png "Create and run activity button")
 
 4. On the **MySQL to Azure Database for MySQL Offline Data Migration Wizard** blade, enter the following values on the **Select source** tab, then select **Next: Select target >>**.
 
@@ -238,27 +238,27 @@ In this exercise, you will migrate the on-premises MySQL database for the web ap
 
     > **Note**: If a different **User name** and **Password** were configured when provisioning the **Azure Database for MySQL** service, then use those credentials instead.
 
-    ![Select target tab with values entered](images/2022-11-21-23-37-12.png "Select target tab with values entered")
+    ![Offline Data Migration Wizard screen with selected target tab with values entered and Next: Select databases highlighted](images/2022-11-21-23-37-12.png "Select target tab with values entered")
 
 6. On the **Select database** tab, ensure the `phpipam` database is selected for both the **Source Database** and **Target Database**, then select **Next: Select tables >>**.
 
-    ![The phpipam source and target database is selected.](images/2022-11-21-23-40-24.png "The phpipam source and target database is selected.")
+    ![The phpipam source and target database are selected with Next: Select tables highlighted.](images/2022-11-21-23-40-24.png "The phpipam source and target database are selected.")
 
 7. On the **Select tables** tab, expand the `phpipam` table, and make sure all tables are selected, then select **Review and start migration**.
 
-    ![All tables selected](images/2022-11-21-23-43-09.png "All tables selected")
+    ![All tables selected with Review and start migration highlighted.](images/2022-11-21-23-43-09.png "All tables selected")
 
 8. On the **Summary** tab, enter `phpipam` into the **Activity name** field, then select **Start migration**.
 
-    ![Summary tab](images/2022-11-21-23-44-56.png "Summary tab")
+    ![Summary tab with Activity name populated and Start migration highlighted.](images/2022-11-21-23-44-56.png "Summary tab")
 
 9. A migration details pane will now display, showing the **Status** as **Pending** while the migration is running.
 
-    ![Migration pending](images/2022-11-21-23-46-20.png "Migration pending")
+    ![Migration pending status is highlighted.](images/2022-11-21-23-46-20.png "Migration pending")
 
 10. After a minute, select **Refresh** to check if the migration has been completed. Once complete, the **Status** will show as **Completed** and the **Migration details** will display the total number of tables that have been migrated.
 
-    ![Migration completed](images/2022-11-21-23-49-09.png "Migration completed")
+    ![Migration complete status and refresh are highlighted](images/2022-11-21-23-49-09.png "Migration completed")
 
 ## Exercise 2: Create VM to migrate a web application
 
@@ -274,7 +274,7 @@ In this task, you will create a new Red Hat Enterprise Linux virtual machine (VM
 
 2. On the **Home** page within the Azure Portal, towards the top, select **Create a resource**.
 
-    ![Create a resource on Azure Portal Home page.](images/2022-11-20-21-08-40.png "Create a resource on Azure Portal Home page.")
+    ![Create a resource on Azure Portal Home page highlighted.](images/2022-11-20-21-08-40.png "Create a resource on Azure Portal Home page.")
 
 3. Within the **Search services and marketplace** field, type **Red Hat Enterprise Linux** and press Enter to search the marketplace, then select **Red Hat Enterprise Linux**.
 
@@ -299,7 +299,7 @@ In this task, you will create a new Red Hat Enterprise Linux virtual machine (VM
 
     > **Note**: Be sure to save the Username and Password for the VM, so it can be used later. A recommendation for an easy to remember Username is `demouser` and Password is `demo!pass123`.
 
-    ![Administrator account credentials set.](images/2022-11-20-21-21-51.png "Administrator account credentials set.")
+    ![Administrator account credentials are set.](images/2022-11-20-21-21-51.png "Administrator account credentials set.")
 
     > **Note**: Password authentication for the Linux VM is being used to simplify the lab. In a production environment, the best practice is to use SSH public key authentication.
 
@@ -312,7 +312,7 @@ In this task, you will create a new Red Hat Enterprise Linux virtual machine (VM
     - **Virtual network**: Select the Spoke VNet that was created for this lab. Its name will be similar to `terrafirm-spoke-vnet`
     - **Subnet**: `default (10.2.0.0/24)`
 
-    ![Network interface fields set.](images/2022-11-20-21-28-50.png "Network interface fields set.")
+    ![Network interface fields are set.](images/2022-11-20-21-28-50.png "Network interface fields set.")
 
 10. For the **Public IP**, ensure that a **new** Public IP is selected so a Public IP is provisioned to enable Internet access to the VM. This will be used to access the Web Application over HTTP.
 
@@ -324,11 +324,11 @@ In this task, you will create a new Red Hat Enterprise Linux virtual machine (VM
 
 12. Select **Review + create** to review the virtual machine settings.
 
-    ![Review + create button](images/2022-11-20-21-36-24.png "Review + create button")
+    ![Review + create button is highlighted.](images/2022-11-20-21-36-24.png "Review + create button")
 
 13. Select **Create** to begin provisioning the virtual machine once the **Validation passed** message is shown.
 
-    ![Validation passed and create button is highlighted.](images/2022-11-20-21-38-48.png "Validation passed and create button is highlighted.")
+    ![Validation passed and create button are highlighted.](images/2022-11-20-21-38-48.png "Validation passed and create button is highlighted.")
 
 ### Task 2: Install web application
 
@@ -344,7 +344,7 @@ In this task, you will connect to the VM over SSH to install and configure the w
 
 3. At the top of the Azure Portal, select the **Cloud Shell** icon to open up the Azure Cloud Shell.
 
-    ![Cloud Shell icon](images/2022-11-21-16-46-35.png "Cloud Shell icon")
+    ![Cloud Shell icon is highlighted](images/2022-11-21-16-46-35.png "Cloud Shell icon")
 
 4. Within the **Cloud Shell**, enter the following `ssh` command to connect to the VM using SSH. Be sure to replace the `<ip-address>` placeholder with the **Public IP Address** that was just copied for the VM.
 
@@ -399,7 +399,7 @@ In this task, you will connect to the VM over SSH to install and configure the w
     - **Start IP address**: Enter the **Public IP Address** for the `terrafirm-webapp-vm` virtual machine.
     - **End IP address**: Enter the **Public IP Address** for the `terrafirm-webapp-vm` virtual machine.
 
-    ![Networking pane](images/2022-11-22-00-23-09.png "Networking pane")
+    ![Networking pane with firewall rulename and save hihglighted.](images/2022-11-22-00-23-09.png "Networking pane")
 
 12. Open a new browser tab, and navigate to the following URL to test that the web application is installed. Be sure to use `http://` since the web application is not currently configured for TLS/SSL.
 
@@ -425,7 +425,7 @@ Duration: 15 minutes
 
 3. Select the **Resource group** you created.
 
-    ![The Resource group list in the Azure Portal.](images/2022-11-20-22-01-36.png "The Resource group list in the Azure Portal.")
+    ![The Resource group list in the Azure Portal with name highlighted.](images/2022-11-20-22-01-36.png "The Resource group list in the Azure Portal.")
 
 4. Select **Delete Resource group**.
 
