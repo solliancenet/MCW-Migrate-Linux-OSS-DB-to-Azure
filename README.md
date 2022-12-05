@@ -4,7 +4,7 @@ Terra Firm Laboratories is a global bioengineering company that’s the leading 
 
 The CTO, Dennis Nedry, has kicked off an initiative for the organization to begin adopting the Microsoft Azure cloud and modernize its infrastructure. He has already had his team begin assessing their current environment and what it will take to migrate to the cloud. They are looking to optimize their technology investments by reducing technical debt and streamlining operations using Azure Infrastructure as a Service (IaaS) and Platform as a Service (PaaS) cloud services.
 
-November 2022
+December 2022
 
 ## Target audience
 
@@ -34,7 +34,7 @@ In this hands-on lab, you will perform steps to migrate Red Hat Enterprise Linux
 
 Terra Firm already has a Hub and Spoke network set up in Azure with Azure Bastion for enabling remote management of Azure VM using Azure Bastion. The Azure resources provisioned throughout this lab will be deployed to this environment.
 
-At the end of this hands-on lab, you will be better able to set up a Red Hat Enterprise Linux (RHEL) VM for application migration to Azure, and migrate an on-premises MySQL database to Azure Database for MySQL.
+At the end of this hands-on lab, you will be better able to set up a Red Hat Enterprise Linux (RHEL) VM for application migration to Azure and migrate an on-premises MySQL database to Azure Database for MySQL.
 
 Continue to the [Hands-on lab](Hands-on%20lab) documents folder.
 
