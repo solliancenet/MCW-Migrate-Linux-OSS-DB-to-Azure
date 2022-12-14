@@ -9,7 +9,7 @@ Hands-on lab step-by-step
 </div>
 
 <div class="MCWHeader3">
-November 2022
+December 2022
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -64,13 +64,13 @@ At the end of this hands-on lab, you will be better able to set up a Red Hat Ent
 
 These are the components of the preferred solution diagram:
 
-- Terra Firm Laboratories has a Hub and Spoke networking setup with Azure ExpressRoute connected to Azure
+- Terra Firm Laboratories has a Hub and Spoke networking setup with Azure ExpressRoute connected to Azure. 
 - The PHP web applications have been migrated to Azure and are running in Azure Virtual Machines hosted within a Spoke VNet in Azure that is peered with the Hub VNet.
 - The MySQL database has been migrated to Azure Database for MySQL and is integrated with the Spoke VNet in Azure that is peered with the Hub VNet and is accessible from the web application.
 - Each application in Azure is contained within its own Subnet with Network Security Groups securing them accordingly.
 - Other components that may be setup up according to the client's security requirements are:
     - Azure Bastion for secure SSH access to Azure VMs
-    - Azure Firewall to protect the front end web applications (a common component to use in a secure Azure networking model)
+    - Azure Firewall to protect the front-end web applications (a common component to use in a secure Azure networking model)
     - Azure Monitor setup to implement monitoring of Azure VMs
 
 ## Requirements
@@ -358,7 +358,7 @@ In this task, you will connect to the VM over SSH to install and configure the w
 
     > **Note**: If you followed the previous suggestions for the VM username and password, then the password for the VM will be `demo!pass123`. Otherwise, enter the password you chose when provisioning the VM.
 
-6. Once connected to the VM via SSH, execute the following commands that will download an install script and run it that will install the web application on the VM:
+6. Once connected to the VM via SSH, execute the following commands that will download an install script and run it. This will install the web application on the VM:
 
     ```bash
     wget https://raw.githubusercontent.com/solliancenet/MCW-Migrate-Linux-OSS-DB-to-Azure/main/Hands-on%20lab/resources/deployment/install-phpipam.sh
