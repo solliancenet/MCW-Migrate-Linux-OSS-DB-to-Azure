@@ -1,7 +1,7 @@
 ![](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/main/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
 
 <div class="MCWHeader1">
-Migrate and modernize case for Linux and OSS DB to Azure
+Building the business migration case with Linux and OSS DB to Azure
 </div>
 
 <div class="MCWHeader2">
@@ -26,7 +26,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 <!-- TOC -->
 
-- [Migrate and modernize case for Linux and OSS DB to Azure whiteboard design session student guide](#Migrate-and-modernize-case-for-Linux-and-OSS-DB-to-Azure-whiteboard-design-session-student-guide)
+- [Building the business migration case with Linux and OSS DB to Azure whiteboard design session student guide](#building-the-business-migration-case-with-linux-and-oss-db-to-azure-whiteboard-design-session-student-guide)
     - [Abstract and learning objectives](#abstract-and-learning-objectives)
     - [Step 1: Review the customer case study](#step-1-review-the-customer-case-study)
         - [Customer situation](#customer-situation)
@@ -40,7 +40,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 <!-- /TOC -->
 
-# Migrate and modernize case for Linux and OSS DB to Azure whiteboard design session student guide
+# Building the business migration case with Linux and OSS DB to Azure whiteboard design session student guide
 
 ## Abstract and learning objectives
 

@@ -1,7 +1,7 @@
 ![](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/main/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
 
 <div class="MCWHeader1">
-Migrate and modernize case for Linux and OSS DB to Azure
+Building the business migration case with Linux and OSS DB to Azure
 </div>
 
 <div class="MCWHeader2">
@@ -26,7 +26,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 <!-- TOC -->
 
-- [Migrate and modernize case for Linux and OSS DB to Azure hands-on lab step-by-step](#migrate-and-modernize-case-for-linux-and-oss-db-to-azure-hands-on-lab-step-by-step)
+- [Building the business migration case with Linux and OSS DB to Azure hands-on lab step-by-step](#building-the-business-migration-case-with-linux-and-oss-db-to-azure-hands-on-lab-step-by-step)
     - [Abstract and learning objectives](#abstract-and-learning-objectives)
     - [Overview](#overview)
     - [Solution architecture](#solution-architecture)
@@ -44,7 +44,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 <!-- /TOC -->
 
-# Migrate and modernize case for Linux and OSS DB to Azure hands-on lab step-by-step
+# Building the business migration case with Linux and OSS DB to Azure hands-on lab step-by-step
 
 ## Abstract and learning objectives
 
