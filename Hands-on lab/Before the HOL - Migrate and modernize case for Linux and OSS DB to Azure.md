@@ -30,7 +30,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Requirements](#requirements)
     - [Before the hands-on lab](#before-the-hands-on-lab)
         - [Task 1: Create existing resources](#task-1-create-existing-resources)
-        - [Task 2: Verify On-Premises Web Application](#task-2-verify-on-premises-web-application)
+        - [Task 2: Verify on-premises web application](#task-2-verify-on-premises-web-application)
 
 <!-- /TOC -->
 
@@ -72,7 +72,7 @@ In this task, you will leverage a custom Azure Resource Manager (ARM) template t
 
     Once the ARM template is deployed, the status will change to complete.
 
-### Task 2: Verify On-Premises Web Application
+### Task 2: Verify on-premises web application
 
 In this task, you will configure the web application hosted on the simulated on-premises virtual machine that was provisioned by the ARM Template deployment.
 

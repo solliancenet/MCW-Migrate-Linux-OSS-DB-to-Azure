@@ -38,11 +38,13 @@ Continue to the [Hands-on lab](Hands-on%20lab) documents folder.
 
 ## Azure services and related products
 
+- RedHat Enterprise Linux
 - Azure VMs
 - Azure Hybrid Benefit (AHB)
 - Azure Database for MySQL
 - Azure Networking
 - Azure Database Migration Service
+- Azure Bastion
 
 ## Azure solutions
 

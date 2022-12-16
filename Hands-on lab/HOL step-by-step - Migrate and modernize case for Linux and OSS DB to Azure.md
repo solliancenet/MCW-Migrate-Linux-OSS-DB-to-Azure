@@ -50,13 +50,15 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 In this hands-on lab, you will perform steps to migrate Red Hat Enterprise Linux (RHEL) and MySQL database workloads to Azure. You will go through provisioning a Red Hat Enterprise Linux VM and migrate MySQL database to Azure Database for MySQL.
 
+At the end of this hands-on lab, you will be better able to set up a Red Hat Enterprise Linux (RHEL) VM for application migration to Azure and migrate an on-premises MySQL database to Azure Database for MySQL.
+
 ## Overview
 
-In this hands-on lab, you will perform steps to migrate Red Hat Enterprise Linux (RHEL) and MySQL database workloads to Azure. You will go through provisioning a Red Hat Enterprise Linux VM and migrate MySQL database to Azure Database for MySQL.
+Terra Firm Laboratories is a global bioengineering company that’s the leading researcher and innovator in genetic and biological science technology. The company was founded in 1975 with its corporate headquarters in Palo Alto, CA. Their mission-critical workloads are currently hosted in an on-premises datacenter and are beginning a journey to modernize and migrate into the cloud using Microsoft Azure.
 
-Terra Firm already has a Hub and Spoke network set up in Azure with Azure Bastion for enabling remote management of Azure VM using Azure Bastion. The Azure resources provisioned throughout this lab will be deployed to this environment.
+The CTO, Dennis Nedry, has kicked off an initiative for the organization to begin adopting the Microsoft Azure cloud and modernize its infrastructure. He has already had his team begin assessing their current environment and what it will take to migrate to the cloud. They are looking to optimize their technology investments by reducing technical debt and streamlining operations using Azure Infrastructure-as-a-Service (IaaS) and Platform-as-a-Service (PaaS) cloud services.
 
-At the end of this hands-on lab, you will be better able to set up a Red Hat Enterprise Linux (RHEL) VM for application migration to Azure and migrate an on-premises MySQL database to Azure Database for MySQL.
+This hands-on lab will guide you through the steps to migrate Terra Firm's initial workload to Azure using RedHat Enterprise Linux and MySQL. They already have a Hub and Spoke network set up in Azure with Azure Bastion for enabling remote management of Azure VM using Azure Bastion. The Azure resources you deploy throughout this lab will be deployed within the existing Hub and Spoke networking environment.
 
 ## Solution architecture
 
@@ -75,11 +77,11 @@ These are the components of the preferred solution diagram:
 
 ## Requirements
 
-- You must have a working Azure subscription to carry out this hands-on lab step-by-step without a spending cap to deploy the Barracuda firewall from the Azure Marketplace.
+- You must have a working Azure subscription to carry out this hands-on lab step-by-step.
 
 ## Before the hands-on lab
 
-Refer to the Before the hands-on lab setup guide manual before continuing to the lab exercises.
+Refer to the [Before the hands-on lab](Before%20the%20HOL%20-%20Migrate%20and%20modernize%20case%20for%20Linux%20and%20OSS%20DB%20to%20Azure.md) setup guide manual before continuing to the lab exercises.
 
 ## Exercise 1: MySQL database migration
 
@@ -416,6 +418,8 @@ In this task, you will connect to the VM over SSH to install and configure the w
 ## After the hands-on lab
 
 Duration: 15 minutes
+
+After you have successfully completed the hands-on lab step-by-step, you will want to delete the Resource Group created. This will free up your subscription from future charges.
 
 ### Task 1: Delete the resource group to remove the lab environment
 

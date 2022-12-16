@@ -70,15 +70,15 @@ Terra Firm Laboratories is a global bioengineering company that’s the leading 
 
 The CTO, Dennis Nedry, has kicked off an initiative for the organization to begin adopting the Microsoft Azure cloud and modernize its infrastructure. He has already had his team begin assessing their current environment and what it will take to migrate to the cloud. They are looking to optimize their technology investments by reducing technical debt and streamlining operations using Azure Infrastructure-as-a-Service (IaaS) and Platform-as-a-Service (PaaS) cloud services.
 
-Terra Firm Laboratories has already completed the first round of analysis to identify the applications and workloads to begin migrating first. Out of over 250 workloads they have running on-premises, they have identified one workload that exemplifies multiple components common across many of their other workloads. The workload is also not their most complicated, so it should prove well to prove out the migration plan as it’s developed. This workload includes Red Hat Enterprise Linux (RHEL) servers hosting a Web application that uses a MySQL backend database.
+Terra Firm Laboratories has already completed the first round of analysis to identify the applications and workloads to begin migrating first. Out of over 250 workloads they have running on-premises, they have identified one workload that exemplifies multiple components common across many of their other workloads. They decided to use a simpler workload that will still assist in proving out the migration plan as it’s developed. This workload includes Red Hat Enterprise Linux (RHEL) servers hosting a Web application that uses a MySQL backend database.
 
 The initial workload to prove the feasibility of the migration process consists of the following:
 
-- Web Application Front End
+- Web application front-end
     - PHP web application hosted using Apache HTTP web server.
     - 2x Red Hat Enterprise Linux 9 servers
         - Each with 2 CPU cores and 16 GB memory
-- Application Databases
+- Application databases
     - MySQL 8
     - 2x server with data replication
         - Each with 4 CPU cores and 32 GB memory
