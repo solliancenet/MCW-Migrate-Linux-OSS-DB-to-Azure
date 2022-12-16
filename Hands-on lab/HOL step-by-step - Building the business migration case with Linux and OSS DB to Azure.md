@@ -81,7 +81,7 @@ These are the components of the preferred solution diagram:
 
 ## Before the hands-on lab
 
-Refer to the [Before the hands-on lab](Before%20the%20HOL%20-%20Migrate%20and%20modernize%20case%20for%20Linux%20and%20OSS%20DB%20to%20Azure.md) setup guide manual before continuing to the lab exercises.
+Refer to the [Before the hands-on lab](Before%20the%20HOL%20-%20Building%20the%20business%20migration%20case%20with%20Linux%20and%20OSS%20DB%20to%20Azure.md) setup guide manual before continuing to the lab exercises.
 
 ## Exercise 1: MySQL database migration
 
